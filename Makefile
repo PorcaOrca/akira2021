@@ -6,14 +6,15 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/02/24 17:03:44 by lodovico         ###   ########.fr        #
+#    Updated: 2021/02/24 17:11:25 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	$(MAPS)\
 			$(DB)\
 			$(EM)\
-			$(MAIN)
+			$(MAIN)\
+			$(IM)
 			
 
 MLX_F	=	-lmlx -lXext -lX11

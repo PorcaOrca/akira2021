@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 16:59:32 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/24 17:12:22 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_img_fill(t_param *param)
 			sidedist.y = (mapy + 1.0 - param->vectors->pos->y) * deltadist.y;
 		}
 		//DDADAJE
-		while (hit = 0)
+		while (hit == 0)
 		{
 			//jump to next map square, in x or y direction
 			if (sidedist.x < sidedist.y)
@@ -123,7 +123,7 @@ void	ft_img_fill(t_param *param)
 		if (yend >= param->win_y)
 			yend = param->win_y - 1;
 		if (side == 1)
-			shade == 0.5;
+			shade = 0.5;
 		if (param->map[mapx][mapx] == '1')
 			trgb = ft_color(shade, 0, 0, 255);
 		if (param->map[mapx][mapx] == '2')

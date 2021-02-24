@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 16:02:48 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/24 17:08:09 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ typedef struct		s_map
 	char	*mapfile;
 	int		count;
 }					t_map;
+
+// image management prototipes
+
+int		ft_color(double shade, int r, int g, int b);
+void	ft_img_fill(t_param *param);
+t_img	*ft_img_init(t_param *param);
+void	ft_img_pixel_put(t_img *img, int x, int y, int color);
+
 
 // maps functions prototipes
 
