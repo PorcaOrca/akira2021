@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/02/24 17:11:25 by lodovico         ###   ########.fr        #
+#    Updated: 2021/02/24 17:16:34 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ compile:	$(NAME)
 			$(CC) $(CFLAGS) main/ft_akira2021.c $(NAME) $(MLX_F) -o akira2021
 
 run:		compile
-			make clean
 			./akira2021
 
 all:		$(NAME)

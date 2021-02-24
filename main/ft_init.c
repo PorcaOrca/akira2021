@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 17:13:09 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/24 18:04:26 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int		ft_init(t_param *param)
 	param->vectors->pos = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->plane = (t_vector *)malloc(sizeof(t_vector));
 
-	param->vectors->pos->x = 10;
-	param->vectors->pos->y = 5;
+	param->vectors->pos->x = 9;
+	param->vectors->pos->y = 4;
 	param->vectors->dir->x = -1;
 	param->vectors->dir->y = 0;
 	param->vectors->plane->x = 0;
-	param->vectors->plane->y = 0.66;
+	param->vectors->plane->y = 0.90;
 	return (1);
 }
 

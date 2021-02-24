@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 17:12:22 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/24 18:01:25 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@ void	ft_img_fill(t_param *param)
 {
 	int			x;
 	t_vector	raydir;
-	//raylenght to next x or y side from start
 	t_vector	sidedist;
-	//raylenght from x or y side to the next y or y side
 	t_vector	deltadist;
 	double		camerax;
 	double		walldist;
-	//what direction to step in x or y-direction (either +1 or -1)
     int 		stepx;
-    int			 stepy;
-    int 		hit; //was there a wall hit?
-    int 		side; //was a NS or a EW wall hit?
+    int			stepy;
+    int 		hit;
+    int 		side;
 
 	int			mapx;
 	int			mapy;
@@ -105,7 +102,7 @@ void	ft_img_fill(t_param *param)
 				mapy += stepy;
 				side = 1;
 			}
-			if (param->map[mapx][mapy] > '0')
+			if (param->map[mapy][mapx] > '0')
 				hit = 1;
 		}
 		//calculate euclidian distance from post to wall
@@ -124,17 +121,17 @@ void	ft_img_fill(t_param *param)
 			yend = param->win_y - 1;
 		if (side == 1)
 			shade = 0.5;
-		if (param->map[mapx][mapx] == '1')
+		if (param->map[mapy][mapx] == '1')
 			trgb = ft_color(shade, 0, 0, 255);
-		if (param->map[mapx][mapx] == '2')
+		if (param->map[mapy][mapx] == '2')
 			trgb = ft_color(shade, 255, 255, 0);
-		if (param->map[mapx][mapx] == '3')
+		if (param->map[mapy][mapx] == '3')
 			trgb = ft_color(shade, 255, 0, 255);
-		if (param->map[mapx][mapx] == '4')
+		if (param->map[mapy][mapx] == '4')
 			trgb = ft_color(shade, 255, 0, 0);
 		while (ystart <= yend)
 		{
-			ft_img_pixel_put(param->img->ptr, x, ystart, trgb);
+			ft_img_pixel_put(param->img, x, ystart, trgb);
 			ystart++;
 		}
 		x++;

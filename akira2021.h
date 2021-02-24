@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 17:08:09 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/24 17:47:55 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_param
 	t_rayc		*vectors;
 	t_img		*img;
 	char		**map;
+	int			lag;
 }				t_param;
 
 
