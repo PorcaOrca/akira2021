@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_fill.c                                      :+:      :+:    :+:   */
+/*   ft_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 16:44:52 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 16:02:19 by lodovico         ###   ########.fr       */
+/*   Created: 2021/02/16 18:21:49 by lodovico          #+#    #+#             */
+/*   Updated: 2021/02/24 16:55:15 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../akira2021.h"
-
-int		ft_map_fill(t_map *map)
+int		ft_color(double shade, int r, int g, int b)
 {
-	int		i;
-	int		x;
-	int		len;
-	
-	i = 0;
-	x = -1;
-	while (map->count > ++x)
-	{
-		len = 0;
-		while (map->buff[i] != '\n' && map->buff[i])
-		{
-			len++;
-			i++;
-		}
-		if (!(map->matrix[x] = (char *)malloc(sizeof(char *) * len)))
-		{
-			ft_map_free(map, x);
-			return (0);
-		}
-		ft_map_str(map, i, len, x);
-		i++;
-	}
-	free(map->buff);
-	return (1);
+	if (r < 0 || r > 255 || b < 0 || b > 255 || g < 0 || g > 255)
+		return (-2147483648);
+	r -= r * shade;
+	g -= g * shade;
+	b -= b * shade;
+	return (r << 16 | g << 8 | b);
 }

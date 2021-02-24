@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/02/24 09:58:16 by lodovico         ###   ########.fr        #
+#    Updated: 2021/02/24 17:03:44 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,13 @@ SRCS	=	$(MAPS)\
 
 MLX_F	=	-lmlx -lXext -lX11
 
-EM		=	event_manage/ft_close.c
+IM		=	img_manage/color_manage/ft_color.c\
+			img_manage/ft_img_fill.c\
+			img_manage/ft_img_init.c\
+			img_manage/ft_img_pixel_put.c
+
+EM		=	event_manage/ft_close.c\
+			event_manage/ft_new_frame.c		
 
 MAIN	=	main/ft_init.c
 
