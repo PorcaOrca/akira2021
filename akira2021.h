@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/24 17:47:55 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:01:34 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <mlx.h>
+# include <math.h>
+
+// macros definition
+
+# define posX		param->vectors->pos->x
+# define posY		param->vectors->pos->y
+# define dirX		param->vectors->dir->x
+# define dirY		param->vectors->dir->y
+# define planeX		param->vectors->plane->x
+# define planeY		param->vectors->plane->y
+# define Wmap		param->map
 
 // param struct definition (everything goes there)
 
@@ -53,7 +64,10 @@ typedef struct	s_param
 	t_rayc		*vectors;
 	t_img		*img;
 	char		**map;
+	double		movspeed;
+	double		rotspeed;
 	int			lag;
+	int			lag_count;
 }				t_param;
 
 
@@ -88,6 +102,7 @@ void	ft_map_str(t_map *map, int y, int len, int x);
 
 int		ft_close(int keycode, t_param *param);
 int		ft_new_frame(t_param *param);
+int		ft_movement(int keycode, t_param *param);
 
 // main prototipes
 

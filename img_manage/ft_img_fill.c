@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/25 09:07:58 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/25 10:50:41 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_img_fill(t_param *param)
 	double		shade;
 
 	// box of the map we are in
-	mapx = (int)param->vectors->pos->x;
-	mapy = (int)param->vectors->pos->y;
+	mapx = (int)posX;
+	mapy = (int)posY;
 	shade = 0;
 	x = 0;
 	hit = 0;
@@ -45,8 +45,8 @@ void	ft_img_fill(t_param *param)
 	{
 		//ray position and direction
 		camerax = (2 * x) / (param->win_x - 1);
-		raydir.x = param->vectors->dir->x + (param->vectors->plane->x * camerax);
-		raydir.y = param->vectors->dir->y + (param->vectors->plane->y * camerax);
+		raydir.x = dirX + (planeX * camerax);
+		raydir.y = dirY + (planeY * camerax);
 		
 		if (raydir.y == 0)
 			deltadist.x = 0;
@@ -69,22 +69,22 @@ void	ft_img_fill(t_param *param)
 		if (raydir.x < 0)
 		{
 			stepx = -1;
-			sidedist.x = (param->vectors->pos->x - mapx) * deltadist.x;
+			sidedist.x = (posX - mapx) * deltadist.x;
 		}
 		else
 		{
 			stepx = 1;
-			sidedist.x = (mapx + 1.0 - param->vectors->pos->x) * deltadist.x;
+			sidedist.x = (mapx + 1.0 - posX) * deltadist.x;
 		}
 		if (raydir.y < 0)
 		{
 			stepy = -1;
-			sidedist.y = (param->vectors->pos->y - mapy) * deltadist.y;
+			sidedist.y = (posY - mapy) * deltadist.y;
 		}
 		else
 		{
 			stepy = 1;
-			sidedist.y = (mapy + 1.0 - param->vectors->pos->y) * deltadist.y;
+			sidedist.y = (mapy + 1.0 - posY) * deltadist.y;
 		}
 		//DDADAJE
 		while (hit == 0)
@@ -107,9 +107,9 @@ void	ft_img_fill(t_param *param)
 		}
 		//calculate euclidian distance from post to wall
 		if (side == 0)
-			walldist = (mapx - param->vectors->pos->x + ((1 - stepx) / 2)) / raydir.x;
+			walldist = (mapx - posX + ((1 - stepx) / 2)) / raydir.x;
 		else
-			walldist = (mapy - param->vectors->pos->y + ((1 - stepy) / 2)) / raydir.y;
+			walldist = (mapy - posY + ((1 - stepy) / 2)) / raydir.y;
 		//calculate height of line to draw
 		lineh = (int)(param->win_y / walldist);
 		// find min and max y to fill
@@ -126,7 +126,7 @@ void	ft_img_fill(t_param *param)
 		if (param->map[mapy][mapx] == '2')
 			trgb = ft_color(shade, 255, 255, 0);
 		if (param->map[mapy][mapx] == '3')
-			trgb = ft_color(shade, 255, 0, 255);
+			trgb = ft_color(shade, 0, 255, 0);
 		if (param->map[mapy][mapx] == '4')
 			trgb = ft_color(shade, 255, 0, 0);
 		while (ystart <= yend)
