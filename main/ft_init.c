@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 10:00:42 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 16:06:23 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int		ft_init(t_param *param)
 {
 	// vectors allocation
-	
+
 	param->vectors = (t_rayc *)malloc(sizeof(t_rayc));
 	param->vectors->dir = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->pos = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->plane = (t_vector *)malloc(sizeof(t_vector));
 
 	// texture struct init
-	
+
 	param->texture = (t_texture *)malloc(sizeof(t_texture));
 
 	// raycasting vectors
@@ -32,14 +32,14 @@ int		ft_init(t_param *param)
 	dirY = 0;
 	planeX = 0;
 	planeY = 1;
-	
+
 	param->settings = (t_settings *)malloc(sizeof(t_settings));
 	// settings
 	winX = 1080;
 	winY = 720;
-	lagi = 50000;
+	lagi = 1;
 	lagc = lagi;
-	movspeed = 1;
+	movspeed = 0.5;
 	rotspeed = 0.05;
 
 	return (1);

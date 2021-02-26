@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
+#    By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/02/26 11:11:42 by lodovico         ###   ########.fr        #
+#    Updated: 2021/02/26 15:30:00 by lspazzin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,11 @@ SRCS	=	$(MAPS)\
 			$(MAIN)\
 			$(IM)\
 			$(TM)
-			
 
-MLX_F	=	-lmlx -lXext -lX11 -lm -lbsd
+
+# MLX_F	=	-lmlx -lXext -lX11 -lm -lbsd
+
+MLX_F	=	-lmlx -framework OpenGL -framework AppKit
 
 TM		=	img_manage/textures/ft_get_txtcolor.c\
 			img_manage/textures/ft_txt_init.c
@@ -30,7 +32,7 @@ IM		=	img_manage/color_manage/ft_color.c\
 
 EM		=	event_manage/ft_close.c\
 			event_manage/ft_new_frame.c\
-			event_manage/ft_movement.c	
+			event_manage/ft_movement.c
 
 MAIN	=	main/ft_init.c
 
@@ -47,7 +49,7 @@ DB		= 	debuggin/debug.c\
 
 NAME	=	akira2021.a
 
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g
 
 CC		=	gcc
 
@@ -66,7 +68,7 @@ run:		compile
 all:		$(NAME)
 
 clean:
-			rm -f $(OBJCS) 
+			rm -f $(OBJCS)
 
 fclean:		clean
 			rm -f $(NAME)

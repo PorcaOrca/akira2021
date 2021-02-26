@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_fill.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 10:57:11 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 16:04:40 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@ void	ft_img_fill(t_param *param)
 {
 	//calculate ray for each x coordinate
 	int			x;
-	
+
 	t_vector	raydir;
 	t_vector	sidedist;
 	t_vector	deltadist;
 
-	
+
 	double		camerax;
 	double		walldist;
-    
+
 	int 		stepx;
     int			stepy;
-    
+
 	int 		hit;
     int 		side;
 
 	int			mapx;
 	int			mapy;
-	
+
 	int			lineh;
 	int			ystart;
 	int			yend;
 
-	//color management
-	//int			trgb;
-	//double		shade;
-
+/*	//color management
+	int			trgb;
+	double		shade;
+*/
 	// texture management
 	int		txtid;
 	int		txtX;
@@ -57,22 +57,22 @@ void	ft_img_fill(t_param *param)
 	{
 		// represent x coordinate in -1, 1 range
 		camerax = ((2 * x) / (double)winX) - 1;
-		
+
 		//ray direction is the sum of the dir vector and the plane vector
 		raydir.x = dirX + (planeX * camerax);
 		raydir.y = dirY + (planeY * camerax);
-		
+
 		// box of the map we are in
 		mapx = (int)posX;
 		mapy = (int)posY;
-		
+
 		// found collision (as boolean)
 		hit = 0;
-		
+
 		// lenght of ray from start to next x or y side
 		if (raydir.y == 0)
 			deltadist.x = 0;
-		else 
+		else
 		{
 			if (raydir.x == 0)
 				deltadist.x = 1;
@@ -82,7 +82,7 @@ void	ft_img_fill(t_param *param)
 		// convert in absolute value
 		if (deltadist.x < 0)
 			deltadist.x = -deltadist.x;
-		
+
 		if (raydir.x == 0)
 			deltadist.y = 0;
 		else
@@ -94,7 +94,7 @@ void	ft_img_fill(t_param *param)
 		}
 		if (deltadist.y < 0)
 			deltadist.y = -deltadist.y;
-		
+
 		//calculate step and initial sideDist
 		if (raydir.x < 0)
 		{
@@ -142,7 +142,7 @@ void	ft_img_fill(t_param *param)
 			walldist = (mapx - posX + ((1 - stepx) / 2)) / raydir.x;
 		else
 			walldist = (mapy - posY + ((1 - stepy) / 2)) / raydir.y;
-		
+
 		//calculate height of line to draw
 		lineh = (int)(winY / walldist);
 
@@ -155,8 +155,8 @@ void	ft_img_fill(t_param *param)
 			yend = winY - 1;
 
 		// wall color fill
-		
-		/*shade = 0;
+/*
+		shade = 0;
 		if (side == 1)
 			shade = 0.5;
 
@@ -172,12 +172,12 @@ void	ft_img_fill(t_param *param)
 		{
 			ft_img_pixel_put(param->img, x, ystart, trgb);
 			ystart++;
-		}*/
-
+		}
+*/
 		// texturized walls
 
 		txtid = Wmap[mapy][mapx] - '0';
-		
+
 		// calculate exactly the wall hit
 		if (side == 0)
 			wallX = posY + (walldist * raydir.y);
@@ -191,17 +191,17 @@ void	ft_img_fill(t_param *param)
 			txtX = winX - txtX - 1;
 		if(side == 1 && raydir.y < 0)
 			txtX = winX - txtX - 1;
-		
+
 		// How much to increase the texture y coordinate per screen pixel
 		step = (1.0 * winY) / lineh;
-		
+
 		// select texture
 
 		if (txtid == 1)
 			txtptr = txt1;
-		if (txtid == 2)
+		if (txtid == 3)
 			txtptr = txt2;
-		
+
 		txtY = 0;
 
 		while (ystart <= yend)
@@ -211,8 +211,7 @@ void	ft_img_fill(t_param *param)
 			txtY += step;
 			ystart++;
 		}
-		
-		
+
 		x++;
 	}
 }
