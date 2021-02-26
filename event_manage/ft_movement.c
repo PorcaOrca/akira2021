@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_movement.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 15:17:53 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/02/26 17:31:02 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,25 @@ int		ft_movement(int keycode, t_param *param)
 	// rotating visual
 
 	// right rotation
-	if (keycode == 100 || keycode == 2)
+	if (keycode == 97 || keycode == 0)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;
 			dirX = (tempdirX * cos(-rotspeed)) - (dirY * sin(-rotspeed));
 			dirY = (tempdirX * sin(-rotspeed)) + (dirY * cos(-rotspeed));
 			planeX = (tempplaneX * cos(-rotspeed)) - (planeY * sin(-rotspeed));
-			planeY = (tempplaneX * sin(-rotspeed)) + (dirY * cos(-rotspeed));
-			/*debugint(rotspeed * 10);
-			debugint(dirX * 1000000);
-			debugint(dirY * 1000000);
-			debugint(planeX * 1000000);
-			debugint(planeY * 1000000);*/
+			planeY = (tempplaneX * sin(-rotspeed)) + (planeY * cos(-rotspeed));
 		}
 	// left rotation
 
-	if (keycode == 97 || keycode == 0)
+	if (keycode == 100 || keycode == 2)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;
 			dirX = (dirX * cos(rotspeed)) - (dirY * sin(rotspeed));
 			dirY = (tempdirX * sin(rotspeed)) + (dirY * cos(rotspeed));
 			planeX = (planeX * cos(rotspeed)) - (planeY * sin(rotspeed));
-			planeY = (tempplaneX * sin(rotspeed)) + (dirY * cos(rotspeed));
+			planeY = (tempplaneX * sin(rotspeed)) + (planeY * cos(rotspeed));
 		}
 	return (keycode);
 }
