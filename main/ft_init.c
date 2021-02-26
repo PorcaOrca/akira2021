@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 16:06:23 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/02/26 17:01:10 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_init(t_param *param)
 	// settings
 	winX = 1080;
 	winY = 720;
-	lagi = 1;
+	lagi = 50000;
 	lagc = lagi;
 	movspeed = 0.5;
 	rotspeed = 0.05;

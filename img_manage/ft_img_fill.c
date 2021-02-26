@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_fill.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 16:04:40 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/02/26 17:19:49 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_img_fill(t_param *param)
 	int		txtid;
 	int		txtX;
 	int		txtY;
+	double	txtpos;
 	double	wallX;
 	double	step;
 	int		trgb;
@@ -202,16 +203,17 @@ void	ft_img_fill(t_param *param)
 		if (txtid == 3)
 			txtptr = txt2;
 
-		txtY = 0;
-
+		//txtpos = (ystart - (winY / 2) + (lineh / 2)) * step;
+		txtpos = 0;
 		while (ystart <= yend)
 		{
+			//txtY = (int)txtpos & (winY - 1);
+			txtY = (int)txtpos;
 			trgb = ft_get_txtcolor(txtptr, txtX, txtY);
 			ft_img_pixel_put(param->img, x, ystart, trgb);
-			txtY += step;
+			txtpos += step;
 			ystart++;
 		}
-
 		x++;
 	}
 }
