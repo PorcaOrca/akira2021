@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 08:22:52 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/25 10:36:14 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:15:07 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,23 @@ int		main()
 {
 	t_param		*param;
 		
-	param = (t_param *)malloc(sizeof(t_param *));
-	param->lag = 0;
-	param->map = ft_map_matrix("maps/map_files/map.cub");
+	param = (t_param *)malloc(sizeof(t_param));
+	
+	//initializing all variables
 	if (!ft_init(param))
 		ft_close(65307, param);
+	
+	//reading map and storing in matrix 
+	Wmap = ft_map_matrix("maps/map_files/map.cub");
+	
+	// initialize textures
+	ft_txt_init(param);
+
+	//initialize server mlx connection and create a new win
 	param->mlx = mlx_init();
-	param->win = mlx_new_window(param->mlx, param->win_x, param->win_y, "akira2021");
+	param->win = mlx_new_window(param->mlx, winX, winY, "akira2021");
+	
+	//event callers
 	mlx_hook(param->win, 2, 1L<<0, ft_movement, param);
 	mlx_loop_hook(param->mlx, ft_new_frame, param);
 	mlx_key_hook(param->win, ft_close, param);

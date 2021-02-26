@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/25 10:46:31 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 09:11:39 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,74 +18,51 @@ int		ft_movement(int keycode, t_param *param)
 	double		tempdirX;
 	double		tempplaneX;
 	
-	if (keycode == 115)
-	{
-		//if (!param->map[(int)posY][(int)(posX + (dirX * param->movspeed))])
-		//{
-			debugint(posX);
-			debugint(posY);
-			posX += dirX * param->movspeed;
-			debugstr("forward");
-		//}
-		//if (!param->map[(int)(posY + (dirY * param->movspeed))][(int)posX])
-			posY += dirY * param->movspeed;
-	}
+	//move forward
+	
 	if (keycode == 119)
 	{
-		//if (!param->map[(int)posY][(int)(posX + (dirX * param->movspeed))])
-		//{
-			debugint(posX);
-			debugint(posY);
-			posX -= dirX * param->movspeed;
-			debugstr("backward");
-		//}
-		//if (!param->map[(int)(posY + (dirY * param->movspeed))][(int)posX])
-			posY -= dirY * param->movspeed;
+		if (Wmap[(int)(posY + 0.5)][(int)((posX + (dirX * movspeed)) + 0.5)] == '0')
+			posX += (dirX * movspeed);
+		if (Wmap[(int)(posY + (dirY * movspeed) + 0.5)][(int)(posX + 0.5)] == '0')
+			posY += (dirY * movspeed);
 	}
-	tempdirX = dirX;
-	tempplaneX = planeX;
+	
+	//move backward
+	if (keycode == 115)
+	{
+		if (param->map[(int)(posY - 0.5)][(int)(posX - (dirX * movspeed) - 0.5)] == '0')
+			posX -= dirX * movspeed;	
+		if (param->map[(int)(posY - (dirY * movspeed) - 0.5)][(int)(posX - 0.5)] == '0')
+			posY -= dirY * movspeed;
+	}
+	// rotating visual
+	
+	// right rotation
 	if (keycode == 100)
 		{
-			debugstr("right");
-			debugint(posX);
-			debugint(posY);
-			dirX = (dirX * cos(-param->rotspeed)) - (dirY * sin(-param->rotspeed));
-			dirY = (tempdirX * sin(-param->rotspeed)) + (dirY * cos(-param->rotspeed));
-			planeX = (planeX * cos(-param->rotspeed)) - (planeY * sin(-param->rotspeed));
-			planeY = (tempplaneX * sin(-param->rotspeed)) + (dirY * cos(-param->rotspeed));
+			tempdirX = dirX;
+			tempplaneX = planeX;
+			dirX = (tempdirX * cos(-rotspeed)) - (dirY * sin(-rotspeed));
+			dirY = (tempdirX * sin(-rotspeed)) + (dirY * cos(-rotspeed));
+			planeX = (tempplaneX * cos(-rotspeed)) - (planeY * sin(-rotspeed));
+			planeY = (tempplaneX * sin(-rotspeed)) + (dirY * cos(-rotspeed));
+			debugint(rotspeed * 10);
+			debugint(dirX * 1000000);
+			debugint(dirY * 1000000);
+			debugint(planeX * 1000000);
+			debugint(planeY * 1000000);
 		}
+	// left rotation
+	
 	if (keycode == 97)
 		{
-			debugint(posX);
-			debugint(posY);
-			debugstr("left");
-			dirX = (dirX * cos(param->rotspeed)) - (dirY * sin(param->rotspeed));
-			dirY = (tempdirX * sin(param->rotspeed)) + (dirY * cos(param->rotspeed));
-			planeX = (planeX * cos(param->rotspeed)) - (planeY * sin(param->rotspeed));
-			planeY = (tempplaneX * sin(param->rotspeed)) + (dirY * cos(param->rotspeed));
+			tempdirX = dirX;
+			tempplaneX = planeX;
+			dirX = (dirX * cos(rotspeed)) - (dirY * sin(rotspeed));
+			dirY = (tempdirX * sin(rotspeed)) + (dirY * cos(rotspeed));
+			planeX = (planeX * cos(rotspeed)) - (planeY * sin(rotspeed));
+			planeY = (tempplaneX * sin(rotspeed)) + (dirY * cos(rotspeed));
 		}
 	return (keycode);
 }
-	
-	/*
-    //rotate to the right
-    if (keyDown(SDLK_RIGHT))
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
-      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
-    }
-    //rotate to the left
-    if (keyDown(SDLK_LEFT))
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);*/

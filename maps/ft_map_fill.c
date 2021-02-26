@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:44:52 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/25 09:08:28 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/25 17:03:19 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_map_fill(t_map *map)
 			len++;
 			i++;
 		}
-		if (!(map->matrix[x] = (char *)malloc(sizeof(char *) * len)))
+		if (!(map->matrix[x] = (char *)malloc(sizeof(char) * len)))
 		{
 			ft_map_free(map, x);
 			return (0);

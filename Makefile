@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/02/25 10:27:33 by lodovico         ###   ########.fr        #
+#    Updated: 2021/02/26 11:11:42 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,14 @@ SRCS	=	$(MAPS)\
 			$(DB)\
 			$(EM)\
 			$(MAIN)\
-			$(IM)
+			$(IM)\
+			$(TM)
 			
 
-MLX_F	=	-lmlx -lXext -lX11 -lm
+MLX_F	=	-lmlx -lXext -lX11 -lm -lbsd
+
+TM		=	img_manage/textures/ft_get_txtcolor.c\
+			img_manage/textures/ft_txt_init.c
 
 IM		=	img_manage/color_manage/ft_color.c\
 			img_manage/ft_img_fill.c\
@@ -69,4 +73,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re compile run

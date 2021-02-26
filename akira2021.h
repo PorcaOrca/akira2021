@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/25 11:01:34 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:10:50 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <mlx.h>
 # include <math.h>
+# include <string.h>
 
 // macros definition
 
@@ -28,26 +29,56 @@
 # define dirY		param->vectors->dir->y
 # define planeX		param->vectors->plane->x
 # define planeY		param->vectors->plane->y
+# define movspeed	param->settings->movement
+# define rotspeed	param->settings->rotation
+# define lagi		param->settings->lag_iterator
+# define lagc		param->settings->lag_count
+# define winX		param->settings->window_size_x
+# define winY		param->settings->window_size_y
 # define Wmap		param->map
+# define txt1		param->texture->texture1
+# define txt2		param->texture->texture2
 
-// param struct definition (everything goes there)
+// param structs definition (everything goes there)
 
+// settings struct
+typedef struct	s_settings
+{
+	double		movement;
+	double		rotation;
+	int			lag_iterator;
+	int			lag_count;
+	int			window_size_x;
+	int			window_size_y;
+}				t_settings;
+
+// img datas struct
 typedef struct	s_img
 {
-	void	*ptr;
-	char	*addr;
-	int		bxp;
-	int		sizel;
-	int		endian;
+	void		*ptr;
+	char		*addr;
+	int			bxp;
+	int			sizel;
+	int			endian;
 }				t_img;
 
+// textures struct imagine all the imagine
 
+typedef struct	s_texture
+{
+	t_img	*texture1;
+	t_img	*texture2;
+}				t_texture;
+
+
+// model for vector struct
 typedef	struct	s_vector
 {
 	double		x;
 	double		y;
 }				t_vector;
 
+// raycasting data struct
 typedef struct	s_rayc
 {
 	t_vector	*pos;
@@ -55,19 +86,16 @@ typedef struct	s_rayc
 	t_vector	*plane;
 }				t_rayc;
 
+// all the parameter are here btw....it' s not working
 typedef struct	s_param
 {
 	void		*mlx;
 	void		*win;
-	int			win_x;
-	int			win_y;
 	t_rayc		*vectors;
 	t_img		*img;
+	t_settings	*settings;
+	t_texture	*texture;
 	char		**map;
-	double		movspeed;
-	double		rotspeed;
-	int			lag;
-	int			lag_count;
 }				t_param;
 
 
@@ -87,6 +115,11 @@ int		ft_color(double shade, int r, int g, int b);
 void	ft_img_fill(t_param *param);
 t_img	*ft_img_init(t_param *param);
 void	ft_img_pixel_put(t_img *img, int x, int y, int color);
+
+// texture management prototipes
+
+void	ft_txt_init(t_param *param);
+int		ft_get_txtcolor(t_img *img, int x, int y);
 
 
 // maps functions prototipes
