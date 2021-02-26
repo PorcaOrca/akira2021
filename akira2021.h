@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 11:10:50 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 17:40:30 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define Wmap		param->map
 # define txt1		param->texture->texture1
 # define txt2		param->texture->texture2
+# define txtW		param->texture->texture_Width
+# define txtH		param->texture->texture_High
 
 // param structs definition (everything goes there)
 
@@ -66,6 +68,8 @@ typedef struct	s_img
 
 typedef struct	s_texture
 {
+	int		texture_Width;
+	int		texture_High;
 	t_img	*texture1;
 	t_img	*texture2;
 }				t_texture;

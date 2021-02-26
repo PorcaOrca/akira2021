@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 17:31:02 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 18:00:35 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_movement(int keycode, t_param *param)
 	// rotating visual
 
 	// right rotation
-	if (keycode == 97 || keycode == 0)
+	if (keycode == 100 || keycode == 2)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;
@@ -49,7 +49,7 @@ int		ft_movement(int keycode, t_param *param)
 		}
 	// left rotation
 
-	if (keycode == 100 || keycode == 2)
+	if (keycode == 97 || keycode == 0)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;

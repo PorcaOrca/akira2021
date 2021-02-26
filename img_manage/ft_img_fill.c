@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 17:19:49 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/02/26 19:24:38 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_img_fill(t_param *param)
 {
 	//calculate ray for each x coordinate
 	int			x;
+	int			y;
 
 	t_vector	raydir;
 	t_vector	sidedist;
@@ -38,6 +39,18 @@ void	ft_img_fill(t_param *param)
 	int			ystart;
 	int			yend;
 
+	// floor casting variables
+	t_vector	raydirL;
+	t_vector	raydirR;
+	t_vector	floorL;
+	t_vector	floorstep;
+	int			pos;
+	int			cellX;
+	int			cellY;
+	double		posZ;
+	double		rowdist;
+	
+
 /*	//color management
 	int			trgb;
 	double		shade;
@@ -52,8 +65,64 @@ void	ft_img_fill(t_param *param)
 	int		trgb;
 	t_img	*txtptr;
 
-	x = 0;
+	y = winY / 2;
 
+	// here goes the pavimentation
+	
+		// raydir for the leftmost ray
+		raydirL.x = dirX - planeX;
+		raydirL.y = dirY - planeY;
+	
+		// raydir for the rightmost ray
+		raydirR.x = dirX + planeX;
+		raydirR.y = dirY + planeY;
+
+		// vertical position of the camera (half screen)
+		posZ = winY * 0.5;
+	// loop for every line
+	while (y < winY)
+	{
+
+	
+		// current y from the center of the screen
+		pos = y - (winY / 2);
+
+		//horizontal distance from the camera for each row
+		rowdist = posZ / pos;
+		
+		// step vector for not calculating with a weight in the x loop
+		floorstep.x = (rowdist * (raydirR.x - raydirL.x)) / winX;
+		floorstep.y = (rowdist * (raydirR.y - raydirL.y)) / winX;
+		
+		// coordinates of the leftmost column. updated stepping trough x
+		floorL.x = posX + (rowdist * raydirL.x);
+		floorL.y = posY + (rowdist * raydirL.y);
+		
+		// do the line yolo
+		x = 0;
+		while (x < winX)
+		{
+			// cell coord given from the int part of the floor vector
+			cellX = (int)floorL.x;
+			cellY = (int)floorL.y;
+
+			// coordinate for the textur pixel
+			txtX = (int)(txtW * (floorL.x - cellX));
+			txtY = (int)(txtH * (floorL.y - cellY));
+			floorL.x += floorstep.x;
+			floorL.y += floorstep.y;
+			
+			trgb = ft_get_txtcolor(txt2, txtX, txtY);
+			ft_img_pixel_put(param->img, x, y, trgb);
+			
+			x++;
+		}
+		y++;
+	}
+
+	// raycasting the walls
+	x = 0;
+	
 	while (x < winX)
 	{
 		// represent x coordinate in -1, 1 range
@@ -187,14 +256,14 @@ void	ft_img_fill(t_param *param)
 		wallX -= floor((wallX));
 
 		// x coordinate on the texture
-		txtX = (int)(wallX * (double)winX);
+		txtX = (int)(wallX * (double)txtW);
 		if(side == 0 && raydir.x > 0)
-			txtX = winX - txtX - 1;
+			txtX = txtW - txtX - 1;
 		if(side == 1 && raydir.y < 0)
-			txtX = winX - txtX - 1;
+			txtX = txtW - txtX - 1;
 
 		// How much to increase the texture y coordinate per screen pixel
-		step = (1.0 * winY) / lineh;
+		step = (1.0 * txtH) / lineh;
 
 		// select texture
 
@@ -203,11 +272,9 @@ void	ft_img_fill(t_param *param)
 		if (txtid == 3)
 			txtptr = txt2;
 
-		//txtpos = (ystart - (winY / 2) + (lineh / 2)) * step;
-		txtpos = 0;
+		txtpos = (ystart - winY / 2 + lineh / 2) * step;
 		while (ystart <= yend)
 		{
-			//txtY = (int)txtpos & (winY - 1);
 			txtY = (int)txtpos;
 			trgb = ft_get_txtcolor(txtptr, txtX, txtY);
 			ft_img_pixel_put(param->img, x, ystart, trgb);
