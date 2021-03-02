@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_movement.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 18:00:35 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 16:26:09 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,28 @@ int		ft_movement(int keycode, t_param *param)
 {
 	double		tempdirX;
 	double		tempplaneX;
+	double		coll;
 
+	coll = 0.1;
 	//move forward
 	if (keycode == 119 || keycode == 13)
 	{
-		if (Wmap[(int)(posY + 0.5)][(int)((posX + (dirX * movspeed)) + 0.5)] == '0')
+		if (Wmap[(int)(posY - coll)][(int)((posX + (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX + (dirX * movspeed) + coll))] == '0' &&
+			Wmap[(int)(posY + coll)][(int)((posX + (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX + (dirX * movspeed) + coll))] == '0')
 			posX += (dirX * movspeed);
-		if (Wmap[(int)(posY + (dirY * movspeed) + 0.5)][(int)(posX + 0.5)] == '0')
+		if (Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX + coll)] == '0' &&
+			Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX - coll)] == '0')
 			posY += (dirY * movspeed);
 	}
 
 	//move backward
 	if (keycode == 115 || keycode == 1)
 	{
-		if (param->map[(int)(posY - 0.5)][(int)(posX - (dirX * movspeed) - 0.5)] == '0')
+		if (Wmap[(int)(posY - coll)][(int)((posX - (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX - (dirX * movspeed) + coll))] == '0' &&
+			Wmap[(int)(posY + coll)][(int)((posX - (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX - (dirX * movspeed) + coll))] == '0')
 			posX -= dirX * movspeed;
-		if (param->map[(int)(posY - (dirY * movspeed) - 0.5)][(int)(posX - 0.5)] == '0')
+		if (Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX + coll)] == '0' &&
+			Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX - coll)] == '0')
 			posY -= dirY * movspeed;
 	}
 	// rotating visual

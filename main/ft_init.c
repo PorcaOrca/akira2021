@@ -6,7 +6,7 @@
 /*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 14:57:21 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/02 15:40:16 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_init(t_param *param)
 	lagi = 0;
 	lagc = lagi;
 	movspeed = 0.5;
-	rotspeed = 0.05;
+	rotspeed = 0.1;
 
 	param->mlx = mlx_init();
 	param->win = mlx_new_window(param->mlx, winX, winY, "akira2021");
