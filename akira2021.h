@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   akira2021.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 10:20:59 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 14:16:50 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct	s_img
 
 typedef	struct	s_txt
 {
-	t_img	*data;
+	t_img	*txt_data;
 	int		texture_Width;
 	int		texture_High;
 }				t_txt;
@@ -171,7 +171,7 @@ void	ft_img_wall(t_param *param);
 
 // texture management prototipes
 
-void	ft_txt_init(t_param *param, t_txt *txt, char *path);
+t_txt	*ft_txt_init(t_param *param, char *path);
 int		ft_get_txtcolor(t_img *img, int x, int y);
 
 

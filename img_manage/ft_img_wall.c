@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:56:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 10:21:33 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 14:00:03 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_fill_px(t_param *param, t_wl_data *data, t_txt *txt,
 	int		trgb;
 	int		txtY;
 	double	txtpos;
-	
+
 	txtpos = (data->ystart - winY / 2 + data->lineh / 2) * step;
 	while (data->ystart <= data->yend)
 		{
 			txtY = (int)txtpos;
-			trgb = ft_get_txtcolor(txt->data, txtX, txtY);
+			trgb = ft_get_txtcolor(txt->txt_data, txtX, txtY);
 			ft_img_pixel_put(param->img, data->x, data->ystart, trgb);
 			txtpos += step;
 			data->ystart++;
@@ -47,7 +47,7 @@ void	ft_fill_column(t_param *param, t_wl_data *data, t_txt *txt)
 	if(data->side == 1 && data->raydir.y < 0)
 		txtX = txt->texture_Width - txtX - 1;
 	step = (1.0 * txt->texture_High) / data->lineh;
-	ft_fill_px(param, data, txt, txtX, step);		
+	ft_fill_px(param, data, txt, txtX, step);
 }
 
 void	ft_calc_column(t_param *param, t_wl_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_fill.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 10:47:32 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 14:41:37 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,5 @@
 void	ft_img_fill(t_param *param)
 {
 	ft_img_floor(param);
-		debug();
-
 	ft_img_wall(param);
 }

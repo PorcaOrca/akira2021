@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_floor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:23:15 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 10:51:11 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 14:53:57 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_fill_line(t_param *param, t_fl_data *data, int y)
 	int		x;
 	int		txtX;
 	int		txtY;
-	
+
 	x = 0;
 	while (x < winX)
 	{
@@ -26,11 +26,9 @@ void		ft_fill_line(t_param *param, t_fl_data *data, int y)
 		data->cellY = (int)data->floorL.y;
 		txtX = (int)(txt_f_1->texture_Width * (data->floorL.x - data->cellX));
 		txtY = (int)(txt_f_1->texture_Width * (data->floorL.y - data->cellY));
-		debug();
 		data->floorL.x += data->fstep.x;
 		data->floorL.y += data->fstep.y;
-		debug();
-		trgb = ft_get_txtcolor(txt_f_1->data, txtX, txtY);
+		trgb = ft_get_txtcolor(txt_f_1->txt_data, txtX, txtY);
 		ft_img_pixel_put(param->img, x, y, trgb);
 		x++;
 	}
@@ -40,7 +38,7 @@ void		ft_img_floor(t_param *param)
 {
 	int			y;
 	t_fl_data	data;
-	
+
 	y = winY / 2;
 	data.rdirL.x = dirX - planeX;
 	data.rdirL.y = dirY - planeY;
@@ -55,7 +53,7 @@ void		ft_img_floor(t_param *param)
 		data.fstep.y = (data.rowdist * (data.rdirR.y - data.rdirL.y)) / winX;
 		data.floorL.x = posX + (data.rowdist * data.rdirL.x);
 		data.floorL.y = posY + (data.rowdist * data.rdirL.y);
-		ft_fill_line(param, &data, y);		
+		ft_fill_line(param, &data, y);
 		y++;
 	}
 }
