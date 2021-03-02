@@ -6,7 +6,7 @@
 /*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:56:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 14:00:03 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/02 17:09:02 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,30 @@ void	ft_deltadist(t_wl_data *data)
 		data->deltadist.y = -data->deltadist.y;
 }
 
+t_txt	*ft_txt_select(t_param *param, t_wl_data *data)
+{
+	if (data->side == 0)
+	{
+		if (data->raydir.x < 0)
+			return (txt_1);
+		else
+			return (txt_3);
+	}
+	if (data->side == 1)
+	{
+		if (data->raydir.y < 0)
+			return (txt_2);
+		else
+			return (txt_4);
+	}
+	return (NULL);
+}
+
 void	ft_img_wall(t_param *param)
 {
 	double		camerax;
 	t_wl_data	data;
+	t_txt		*txt;
 
 	data.x = 0;
 	while (data.x < winX)
@@ -158,7 +178,8 @@ void	ft_img_wall(t_param *param)
 		ft_step(param, &data);
 		ft_DDA(param, &data);
 		ft_calc_column(param, &data);
-		ft_fill_column(param, &data, txt_1);
+		txt = ft_txt_select(param, &data);
+		ft_fill_column(param, &data, txt);
 		data.x++;
 	}
 }

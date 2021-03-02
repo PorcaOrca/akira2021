@@ -6,7 +6,7 @@
 /*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 15:40:00 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/02 16:55:40 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define winY		param->settings->window_size_y
 # define Wmap		param->map
 # define txt_1		param->texture->texture1
+# define txt_2		param->texture->texture2
+# define txt_3		param->texture->texture3
+# define txt_4		param->texture->texture4
 # define txt_sb_1	param->texture->skybox_1
 # define txt_f_1	param->texture->floor_1
 
@@ -75,7 +78,9 @@ typedef	struct	s_txt
 typedef struct	s_texture
 {
 	t_txt	*texture1;
-	t_txt	*skybox_1;
+	t_txt	*texture2;
+	t_txt	*texture3;
+	t_txt	*texture4;
 	t_txt	*floor_1;
 }				t_texture;
 

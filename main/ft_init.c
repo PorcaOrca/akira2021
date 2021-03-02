@@ -6,7 +6,7 @@
 /*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 15:40:16 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/02 17:15:32 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int		ft_init(t_param *param)
 	// texture init
 
 	txt_1 = ft_txt_init(param, "img_manage/textures/texture_files/txt_wall_stone.xpm");
-	txt_f_1 = ft_txt_init(param, "img_manage/textures/texture_files/txt_floor_tile.xpm");
+	txt_2 = ft_txt_init(param, "img_manage/textures/texture_files/txt_wall_brick.xpm");
+	txt_3 = ft_txt_init(param, "img_manage/textures/texture_files/txt_wall_sand.xpm");
+	txt_4 = ft_txt_init(param, "img_manage/textures/texture_files/txt_wall_wood.xpm");
+	txt_f_1 = ft_txt_init(param, "img_manage/textures/texture_files/txt_floor_dark.xpm");
 	return (1);
 }
