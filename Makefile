@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/02/26 17:00:10 by lodovico         ###   ########.fr        #
+#    Updated: 2021/03/02 10:17:53 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ TM		=	img_manage/textures/ft_get_txtcolor.c\
 IM		=	img_manage/color_manage/ft_color.c\
 			img_manage/ft_img_fill.c\
 			img_manage/ft_img_init.c\
-			img_manage/ft_img_pixel_put.c
+			img_manage/ft_img_pixel_put.c\
+			img_manage/ft_img_floor.c\
+			img_manage/ft_img_wall.c
 
 EM		=	event_manage/ft_close.c\
 			event_manage/ft_new_frame.c\

@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 17:40:30 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 10:20:59 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@
 # define winX		param->settings->window_size_x
 # define winY		param->settings->window_size_y
 # define Wmap		param->map
-# define txt1		param->texture->texture1
-# define txt2		param->texture->texture2
-# define txtW		param->texture->texture_Width
-# define txtH		param->texture->texture_High
+# define txt_1		param->texture->texture1
+# define txt_sb_1	param->texture->skybox_1
+# define txt_f_1	param->texture->floor_1
 
 // param structs definition (everything goes there)
 
@@ -66,13 +65,21 @@ typedef struct	s_img
 
 // textures struct imagine all the imagine
 
-typedef struct	s_texture
+typedef	struct	s_txt
 {
+	t_img	*data;
 	int		texture_Width;
 	int		texture_High;
-	t_img	*texture1;
-	t_img	*texture2;
+}				t_txt;
+
+typedef struct	s_texture
+{
+	t_txt	*texture1;
+	t_txt	*skybox_1;
+	t_txt	*floor_1;
 }				t_texture;
+
+
 
 
 // model for vector struct
@@ -102,6 +109,38 @@ typedef struct	s_param
 	char		**map;
 }				t_param;
 
+// floor data struct
+typedef struct		s_fl_data
+{
+	t_vector	rdirL;
+	t_vector	rdirR;
+	t_vector	floorL;
+	t_vector	fstep;
+	int			pos;
+	int			cellX;
+	int			cellY;
+	double		posZ;
+	double		rowdist;
+}					t_fl_data;
+
+// wall data struct
+typedef struct		s_wl_data
+{
+	t_vector	raydir;
+	t_vector	sidedist;
+	t_vector	deltadist;
+	double		walldist;
+	int 		stepx;
+    int			stepy;
+    int 		side;
+	int			mapx;
+	int			mapy;
+	int			lineh;
+	int			ystart;
+	int			yend;
+	int			x;
+}					t_wl_data;
+
 
 // maps struct definition
 
@@ -119,10 +158,20 @@ int		ft_color(double shade, int r, int g, int b);
 void	ft_img_fill(t_param *param);
 t_img	*ft_img_init(t_param *param);
 void	ft_img_pixel_put(t_img *img, int x, int y, int color);
+void	ft_fill_line(t_param *param, t_fl_data *data, int y);
+void	ft_img_floor(t_param *param);
+void	ft_fill_px(t_param *param, t_wl_data *data, t_txt *txt,
+					int txtX, double step);
+void	ft_fill_column(t_param *param, t_wl_data *data, t_txt *txt);
+void	ft_calc_column(t_param *param, t_wl_data *data);
+void	ft_DDA(t_param *param, t_wl_data *data);
+void	ft_step(t_param *param, t_wl_data *data);
+void	ft_deltadist(t_wl_data *data);
+void	ft_img_wall(t_param *param);
 
 // texture management prototipes
 
-void	ft_txt_init(t_param *param);
+void	ft_txt_init(t_param *param, t_txt *txt, char *path);
 int		ft_get_txtcolor(t_img *img, int x, int y);
 
 
