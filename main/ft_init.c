@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 08:54:18 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/02 10:45:30 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ int		ft_init(t_param *param)
 	param->vectors->dir = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->pos = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->plane = (t_vector *)malloc(sizeof(t_vector));
-
-	// texture struct init
-
-	param->texture = (t_texture *)malloc(sizeof(t_texture));
-	
-	// texture init
-
-	ft_txt_init(param, txt_1, "img_manage/textures/texture_files/txt_wall_wood.xpm");
-	ft_txt_init(param, txt_f_1, "img_manage/textures/texture_files/txt_floor_dark.xpm");
 
 	// raycasting vectors
 	posX = 4;
@@ -47,5 +38,16 @@ int		ft_init(t_param *param)
 	movspeed = 0.5;
 	rotspeed = 0.05;
 
+	param->mlx = mlx_init();
+	param->win = mlx_new_window(param->mlx, winX, winY, "akira2021");
+	
+	// texture struct init
+
+	param->texture = (t_texture *)malloc(sizeof(t_texture));
+	
+	// texture init
+	
+	ft_txt_init(param, txt_1, "img_manage/textures/texture_files/txt_wall_wood.xpm");
+	ft_txt_init(param, txt_f_1, "img_manage/textures/texture_files/txt_floor_dark.xpm");
 	return (1);
 }
