@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:10:23 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/25 09:08:48 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:41:33 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int		ft_map_size(t_map *map)
 	if ((fd = open(map->mapfile, O_RDONLY)) < 0)
 		return (0);
 	while ((ret = read(fd, tmp, 1)) > 0)
+	{
+	//	if (tmp[0] == '2')
+	//		sp_num++;
 		fsize++;
+	}
 	if (ret < 0)
 		return (0);
 	map->buff = (char *)malloc((sizeof(char) * (fsize + 1)));

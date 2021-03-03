@@ -3,115 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:56:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 17:09:02 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/03 09:45:27 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../akira2021.h"
 
-void	ft_fill_px(t_param *param, t_wl_data *data, t_txt *txt,
-					int txtX, double step)
+void	ft_fill_px(t_param *param)
 {
-	int		trgb;
-	int		txtY;
-	double	txtpos;
-
-	txtpos = (data->ystart - winY / 2 + data->lineh / 2) * step;
-	while (data->ystart <= data->yend)
+	wl_data->txtpos = (wl_data->ystart - winY / 2 + wl_data->lineh / 2) * wl_data->step;
+	while (wl_data->ystart <= wl_data->yend)
 		{
-			txtY = (int)txtpos;
-			trgb = ft_get_txtcolor(txt->txt_data, txtX, txtY);
-			ft_img_pixel_put(param->img, data->x, data->ystart, trgb);
-			txtpos += step;
-			data->ystart++;
+			txtY = (int)wl_data->txtpos;
+			trgb = ft_get_txtcolor(wl_data->txt->txt_data, txtX, txtY);
+			ft_img_pixel_put(param->img, i_x, wl_data->ystart, trgb);
+			wl_data->txtpos += wl_data->step;
+			wl_data->ystart++;
 		}
 }
 
-void	ft_fill_column(t_param *param, t_wl_data *data, t_txt *txt)
+void	ft_fill_column(t_param *param)
 {
-	int		txtX;
-	double	wallX;
-	double	step;
-
-	if (data->side == 0)
-		wallX = posY + (data->walldist * data->raydir.y);
+	if (wl_data->side == 0)
+		wl_data->wallX = posY + (wl_data->walldist * wl_data->raydir.y);
    	else
-		wallX = posX + (data->walldist * data->raydir.x);
-	wallX -= floor((wallX));
-	txtX = (int)(wallX * (double)txt->texture_Width);
-	if(data->side == 0 && data->raydir.x > 0)
-		txtX = txt->texture_Width - txtX - 1;
-	if(data->side == 1 && data->raydir.y < 0)
-		txtX = txt->texture_Width - txtX - 1;
-	step = (1.0 * txt->texture_High) / data->lineh;
-	ft_fill_px(param, data, txt, txtX, step);
+		wl_data->wallX = posX + (wl_data->walldist * wl_data->raydir.x);
+	wl_data->wallX -= floor((wl_data->wallX));
+	txtX = (int)(wl_data->wallX * (double)wl_data->txt->texture_Width);
+	if(wl_data->side == 0 && wl_data->raydir.x > 0)
+		txtX = wl_data->txt->texture_Width - txtX - 1;
+	if(wl_data->side == 1 && wl_data->raydir.y < 0)
+		txtX = wl_data->txt->texture_Width - txtX - 1;
+	wl_data->step = (1.0 * wl_data->txt->texture_High) / wl_data->lineh;
+	ft_fill_px(param);
 }
 
-void	ft_calc_column(t_param *param, t_wl_data *data)
+void	ft_calc_column(t_param *param)
 {
-		if (data->side == 0)
-			data->walldist = (data->mapx - posX +
-				((1 - data->stepx) / 2)) / data->raydir.x;
+		if (wl_data->side == 0)
+			wl_data->walldist = (wl_data->mapx - posX +
+				((1 - wl_data->stepx) / 2)) / wl_data->raydir.x;
 		else
-			data->walldist = (data->mapy - posY +
-				((1 - data->stepy) / 2)) / data->raydir.y;
-		data->lineh = (int)(winY / data->walldist);
-		data->ystart = (-data->lineh / 2) + (winY / 2);
-		if (data->ystart < 0)
-			data->ystart = 0;
-		data->yend = (data->lineh / 2) + (winY / 2);
-		if (data->yend >= winY)
-			data->yend = winY - 1;
+			wl_data->walldist = (wl_data->mapy - posY +
+				((1 - wl_data->stepy) / 2)) / wl_data->raydir.y;
+		wl_data->lineh = (int)(winY / wl_data->walldist);
+		wl_data->ystart = (-wl_data->lineh / 2) + (winY / 2);
+		if (wl_data->ystart < 0)
+			wl_data->ystart = 0;
+		wl_data->yend = (wl_data->lineh / 2) + (winY / 2);
+		if (wl_data->yend >= winY)
+			wl_data->yend = winY - 1;
 }
 
-void	ft_DDA(t_param *param, t_wl_data *data)
+void	ft_DDA(t_param *param)
 {
-	int		hit;
-
-	hit = 0;
-	while (hit == 0)
+	wl_data->hit = 0;
+	while (wl_data->hit == 0)
 	{
-		if (data->sidedist.x < data->sidedist.y)
+		if (wl_data->sidedist.x < wl_data->sidedist.y)
 		{
-			data->sidedist.x += data->deltadist.x;
-			data->mapx += data->stepx;
-			data->side = 0;
+			wl_data->sidedist.x += wl_data->deltadist.x;
+			wl_data->mapx += wl_data->stepx;
+			wl_data->side = 0;
 		}
 		else
 		{
-			data->sidedist.y += data->deltadist.y;
-			data->mapy += data->stepy;
-			data->side = 1;
+			wl_data->sidedist.y += wl_data->deltadist.y;
+			wl_data->mapy += wl_data->stepy;
+			wl_data->side = 1;
 		}
-		if (param->map[data->mapy][data->mapx] > '0')
-			hit = 1;
+		if (Wmap[wl_data->mapy][wl_data->mapx] > '0')
+			wl_data->hit = 1;
 		}
 }
 
-void	ft_step(t_param *param, t_wl_data *data)
+void	ft_step(t_param *param)
 {
-	if (data->raydir.x < 0)
+	if (wl_data->raydir.x < 0)
 		{
-			data->stepx = -1;
-			data->sidedist.x = (posX - data->mapx) * data->deltadist.x;
+			wl_data->stepx = -1;
+			wl_data->sidedist.x = (posX - wl_data->mapx) * wl_data->deltadist.x;
 		}
 		else
 		{
-			data->stepx = 1;
-			data->sidedist.x = (data->mapx + 1.0 - posX) * data->deltadist.x;
+			wl_data->stepx = 1;
+			wl_data->sidedist.x = (wl_data->mapx + 1.0 - posX) * wl_data->deltadist.x;
 		}
-		if (data->raydir.y < 0)
+		if (wl_data->raydir.y < 0)
 		{
-			data->stepy = -1;
-			data->sidedist.y = (posY - data->mapy) * data->deltadist.y;
+			wl_data->stepy = -1;
+			wl_data->sidedist.y = (posY - wl_data->mapy) * wl_data->deltadist.y;
 		}
 		else
 		{
-			data->stepy = 1;
-			data->sidedist.y = (data->mapy + 1.0 - posY) * data->deltadist.y;
+			wl_data->stepy = 1;
+			wl_data->sidedist.y = (wl_data->mapy + 1.0 - posY) * wl_data->deltadist.y;
 		}
 }
 
@@ -141,18 +130,18 @@ void	ft_deltadist(t_wl_data *data)
 		data->deltadist.y = -data->deltadist.y;
 }
 
-t_txt	*ft_txt_select(t_param *param, t_wl_data *data)
+t_txt	*ft_txt_select(t_param *param)
 {
-	if (data->side == 0)
+	if (wl_data->side == 0)
 	{
-		if (data->raydir.x < 0)
+		if (wl_data->raydir.x < 0)
 			return (txt_1);
 		else
 			return (txt_3);
 	}
-	if (data->side == 1)
+	if (wl_data->side == 1)
 	{
-		if (data->raydir.y < 0)
+		if (wl_data->raydir.y < 0)
 			return (txt_2);
 		else
 			return (txt_4);
@@ -162,24 +151,20 @@ t_txt	*ft_txt_select(t_param *param, t_wl_data *data)
 
 void	ft_img_wall(t_param *param)
 {
-	double		camerax;
-	t_wl_data	data;
-	t_txt		*txt;
-
-	data.x = 0;
-	while (data.x < winX)
+	i_x = 0;
+	while (i_x < winX)
 	{
-		camerax = ((2 * data.x) / (double)winX) - 1;
-		data.raydir.x = dirX + (planeX * camerax);
-		data.raydir.y = dirY + (planeY * camerax);
-		data.mapx = (int)posX;
-		data.mapy = (int)posY;
-		ft_deltadist(&data);
-		ft_step(param, &data);
-		ft_DDA(param, &data);
-		ft_calc_column(param, &data);
-		txt = ft_txt_select(param, &data);
-		ft_fill_column(param, &data, txt);
-		data.x++;
+		wl_data->camerax = ((2 * i_x) / (double)winX) - 1;
+		wl_data->raydir.x = dirX + (planeX * wl_data->camerax);
+		wl_data->raydir.y = dirY + (planeY * wl_data->camerax);
+		wl_data->mapx = (int)posX;
+		wl_data->mapy = (int)posY;
+		ft_deltadist(wl_data);
+		ft_step(param);
+		ft_DDA(param);
+		ft_calc_column(param);
+		wl_data->txt = ft_txt_select(param);
+		ft_fill_column(param);
+		i_x++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   akira2021.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 16:55:40 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:36:29 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@
 # define txt_4		param->texture->texture4
 # define txt_sb_1	param->texture->skybox_1
 # define txt_f_1	param->texture->floor_1
+# define fl_data	param->floor_data
+# define wl_data	param->wall_data
+# define trgb		param->common_data->color_trgb
+# define i_x		param->common_data->iterator_x
+# define i_y		param->common_data->iterator_y
+# define txtX		param->common_data->texture_X
+# define txtY		param->common_data->texture_Y
 
 // param structs definition (everything goes there)
 
@@ -102,18 +109,6 @@ typedef struct	s_rayc
 	t_vector	*plane;
 }				t_rayc;
 
-// all the parameter are here btw....it' s not working
-typedef struct	s_param
-{
-	void		*mlx;
-	void		*win;
-	t_rayc		*vectors;
-	t_img		*img;
-	t_settings	*settings;
-	t_texture	*texture;
-	char		**map;
-}				t_param;
-
 // floor data struct
 typedef struct		s_fl_data
 {
@@ -134,6 +129,8 @@ typedef struct		s_wl_data
 	t_vector	raydir;
 	t_vector	sidedist;
 	t_vector	deltadist;
+	t_txt		*txt;
+	double		camerax;
 	double		walldist;
 	int 		stepx;
     int			stepy;
@@ -143,8 +140,44 @@ typedef struct		s_wl_data
 	int			lineh;
 	int			ystart;
 	int			yend;
-	int			x;
+	double		txtpos;
+	double		wallX;
+	double		step;
+	int			hit;
 }					t_wl_data;
+
+// common data struct
+typedef struct		s_common
+{
+	int		iterator_x;
+	int		iterator_y;
+	int		color_trgb;
+	int		texture_X;
+	int		texture_Y;
+}					t_common;
+
+typedef struct		s_sprite
+{
+	int		s_pos_x;
+	int		s_pos_y;
+	t_txt	s_txt;
+}					t_sprite;
+
+// all the parameter are here btw....it' s not working
+typedef struct	s_param
+{
+	void		*mlx;
+	void		*win;
+	t_rayc		*vectors;
+	t_img		*img;
+	t_settings	*settings;
+	t_texture	*texture;
+	t_common	*common_data;
+	t_fl_data	*floor_data;
+	t_wl_data	*wall_data;
+	t_sprite	*sprite;
+	char		**map;
+}				t_param;
 
 
 // maps struct definition
@@ -163,14 +196,13 @@ int		ft_color(double shade, int r, int g, int b);
 void	ft_img_fill(t_param *param);
 t_img	*ft_img_init(t_param *param);
 void	ft_img_pixel_put(t_img *img, int x, int y, int color);
-void	ft_fill_line(t_param *param, t_fl_data *data, int y);
+void	ft_fill_line(t_param *param);
 void	ft_img_floor(t_param *param);
-void	ft_fill_px(t_param *param, t_wl_data *data, t_txt *txt,
-					int txtX, double step);
-void	ft_fill_column(t_param *param, t_wl_data *data, t_txt *txt);
-void	ft_calc_column(t_param *param, t_wl_data *data);
-void	ft_DDA(t_param *param, t_wl_data *data);
-void	ft_step(t_param *param, t_wl_data *data);
+void	ft_fill_px(t_param *param);
+void	ft_fill_column(t_param *param);
+void	ft_calc_column(t_param *param);
+void	ft_DDA(t_param *param);
+void	ft_step(t_param *param);
 void	ft_deltadist(t_wl_data *data);
 void	ft_img_wall(t_param *param);
 

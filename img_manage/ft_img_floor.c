@@ -3,58 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_img_floor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:23:15 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 14:53:57 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/03 09:26:08 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../akira2021.h"
 
-void		ft_fill_line(t_param *param, t_fl_data *data, int y)
+void		ft_fill_line(t_param *param)
 {
-	int		trgb;
-	int		x;
-	int		txtX;
-	int		txtY;
-
-	x = 0;
-	while (x < winX)
+	i_x = 0;
+	while (i_x < winX)
 	{
-		data->cellX = (int)data->floorL.x;
-		data->cellY = (int)data->floorL.y;
-		txtX = (int)(txt_f_1->texture_Width * (data->floorL.x - data->cellX));
-		txtY = (int)(txt_f_1->texture_Width * (data->floorL.y - data->cellY));
-		data->floorL.x += data->fstep.x;
-		data->floorL.y += data->fstep.y;
+		fl_data->cellX = (int)fl_data->floorL.x;
+		fl_data->cellY = (int)fl_data->floorL.y;
+		txtX = (int)(txt_f_1->texture_Width * (fl_data->floorL.x - fl_data->cellX));
+		txtY = (int)(txt_f_1->texture_Width * (fl_data->floorL.y - fl_data->cellY));
+		fl_data->floorL.x += fl_data->fstep.x;
+		fl_data->floorL.y += fl_data->fstep.y;
 		trgb = ft_get_txtcolor(txt_f_1->txt_data, txtX, txtY);
-		ft_img_pixel_put(param->img, x, y, trgb);
-		x++;
+		ft_img_pixel_put(param->img, i_x, i_y, trgb);
+		i_x++;
 	}
 }
 
 void		ft_img_floor(t_param *param)
 {
-	int			y;
-	t_fl_data	data;
-
-	y = winY / 2;
-	data.rdirL.x = dirX - planeX;
-	data.rdirL.y = dirY - planeY;
-	data.rdirR.x = dirX + planeX;
-	data.rdirR.y = dirY + planeY;
-	data.posZ = winY * 0.5;
-	while (y < winY)
+	i_y = winY / 2;
+	fl_data->rdirL.x = dirX - planeX;
+	fl_data->rdirL.y = dirY - planeY;
+	fl_data->rdirR.x = dirX + planeX;
+	fl_data->rdirR.y = dirY + planeY;
+	fl_data->posZ = winY * 0.5;
+	while (i_y < winY)
 	{
-		data.pos = y - (winY / 2);
-		data.rowdist = data.posZ / data.pos;
-		data.fstep.x = (data.rowdist * (data.rdirR.x - data.rdirL.x)) / winX;
-		data.fstep.y = (data.rowdist * (data.rdirR.y - data.rdirL.y)) / winX;
-		data.floorL.x = posX + (data.rowdist * data.rdirL.x);
-		data.floorL.y = posY + (data.rowdist * data.rdirL.y);
-		ft_fill_line(param, &data, y);
-		y++;
+		fl_data->pos = i_y - (winY / 2);
+		fl_data->rowdist = fl_data->posZ / fl_data->pos;
+		fl_data->fstep.x = (fl_data->rowdist * (fl_data->rdirR.x - fl_data->rdirL.x)) / winX;
+		fl_data->fstep.y = (fl_data->rowdist * (fl_data->rdirR.y - fl_data->rdirL.y)) / winX;
+		fl_data->floorL.x = posX + (fl_data->rowdist * fl_data->rdirL.x);
+		fl_data->floorL.y = posY + (fl_data->rowdist * fl_data->rdirL.y);
+		ft_fill_line(param);
+		i_y++;
 	}
 }
 

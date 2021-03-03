@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 17:15:32 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:58:34 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int		ft_init(t_param *param)
 	param->vectors->pos = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->plane = (t_vector *)malloc(sizeof(t_vector));
 
+	fl_data = (t_fl_data *)malloc(sizeof(t_fl_data));
+	wl_data = (t_wl_data *)malloc(sizeof(t_wl_data));
+	param->common_data = (t_common *)malloc(sizeof(t_common));
 	// raycasting vectors
 	posX = 4;
 	posY = 4;
@@ -31,11 +34,11 @@ int		ft_init(t_param *param)
 
 	param->settings = (t_settings *)malloc(sizeof(t_settings));
 	// settings
-	winX = 1920;
-	winY = 1080;
+	winX = 1080;
+	winY = 720;
 	lagi = 0;
 	lagc = lagi;
-	movspeed = 0.5;
+	movspeed = 0.2;
 	rotspeed = 0.1;
 
 	param->mlx = mlx_init();

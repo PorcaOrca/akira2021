@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_close.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:05:28 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 15:14:59 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/03 09:28:40 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,43 @@
 
 int		ft_close(int keycode, t_param *param)
 {
+	int x;
+
+	x = 0;
 	if (keycode == 65307 || keycode == 53)
 	{
+		mlx_destroy_image(param->mlx, txt_1->txt_data->ptr);
+		mlx_destroy_image(param->mlx, txt_2->txt_data->ptr);
+		mlx_destroy_image(param->mlx, txt_3->txt_data->ptr);
+		mlx_destroy_image(param->mlx, txt_4->txt_data->ptr);
+		mlx_destroy_image(param->mlx, txt_f_1->txt_data->ptr);
+		free(txt_1->txt_data);
+		free(txt_2->txt_data);
+		free(txt_3->txt_data);
+		free(txt_4->txt_data);
+		free(txt_f_1->txt_data);
+		free(txt_1);
+		free(txt_2);
+		free(txt_3);
+		free(txt_4);
+		free(txt_f_1);
+		free(param->texture);
 		mlx_clear_window (param->mlx, param->win);
 		mlx_destroy_window (param->mlx, param->win);
+		while (param->map[x])
+		{
+			free(param->map[x]);
+			x++;
+		}
+		free(param->map);
+		free(param->vectors->dir);
+		free(param->vectors->plane);
+		free(param->vectors->pos);
+		free(param->vectors);
+		free(param->settings);
+		free(fl_data);
+		free(wl_data);
+		free(param->common_data);
 		free(param);
 		exit (0);
 	}

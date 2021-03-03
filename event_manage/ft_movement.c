@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_movement.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 16:26:09 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:59:52 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,26 @@ int		ft_movement(int keycode, t_param *param)
 			Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX - coll)] == '0')
 			posY += (dirY * movspeed);
 	}
-
+	// strafe right
+	if (keycode == 100 || keycode == 13)
+	{
+		if (Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) + coll))] == '0' &&
+			Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) + coll))] == '0')
+			posX += (planeX * movspeed);
+		if (Wmap[(int)(posY + (planeY * movspeed) - coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY + (planeY * movspeed) + coll)][(int)(posX + coll)] == '0' &&
+			Wmap[(int)(posY + (planeY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY + (planeY * movspeed) + coll)][(int)(posX - coll)] == '0')
+			posY += (planeY * movspeed);
+	}
+	// strafe left
+	if (keycode == 97 || keycode == 13)
+	{
+		if (Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) + coll))] == '0' &&
+			Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) + coll))] == '0')
+			posX -= (planeX * movspeed);
+		if (Wmap[(int)(posY - (planeY * movspeed) - coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY - (planeY * movspeed) + coll)][(int)(posX + coll)] == '0' &&
+			Wmap[(int)(posY - (planeY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY - (planeY * movspeed) + coll)][(int)(posX - coll)] == '0')
+			posY -= (planeY * movspeed);
+	}
 	//move backward
 	if (keycode == 115 || keycode == 1)
 	{
@@ -44,7 +63,7 @@ int		ft_movement(int keycode, t_param *param)
 	// rotating visual
 
 	// right rotation
-	if (keycode == 100 || keycode == 2)
+	if (keycode == 65363 || keycode == 2)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;
@@ -55,7 +74,7 @@ int		ft_movement(int keycode, t_param *param)
 		}
 	// left rotation
 
-	if (keycode == 97 || keycode == 0)
+	if (keycode == 65361 || keycode == 0)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;
@@ -64,5 +83,6 @@ int		ft_movement(int keycode, t_param *param)
 			planeX = (planeX * cos(rotspeed)) - (planeY * sin(rotspeed));
 			planeY = (tempplaneX * sin(rotspeed)) + (planeY * cos(rotspeed));
 		}
+	debugint(keycode);
 	return (keycode);
 }
