@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 10:57:41 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/04 17:58:49 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:12:37 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	int		b;
 	map_line = 1;
 	temp->sprite_q = 0;
-	if ((fd = open(mapfile, O_RDONLY)) < 0)
-		return (0);
+	fd = open(mapfile, O_RDONLY);
 	while (*str != '1' && ret)
 	{
-		ret = get_next_line(fd, &temp);
+		ret = get_next_line(fd, &str);
 		if (*str == 'R')
 		{
 			matrix = ft_split(str, ' ');
@@ -106,14 +105,14 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	}
 	while (ret)
 	{
-		ret = get_next_line(fd, &temp);
+		ret = get_next_line(fd, &str);
 		map_line++;
 	}
-	matrix = (char *)malloc(sizeof(char *) * (map_line + 1));
+	matrix = (char **)malloc(sizeof(char *) * (map_line + 1));
 	matrix[map_line] = NULL;
 	while (*str != '1' && ret)
-		ret = get_next_line(fd, &temp);
-	matrix[0] = temp;
+		ret = get_next_line(fd, &str);
+	matrix[0] = str;
 	i = 1;
 	while (ret)
 	{

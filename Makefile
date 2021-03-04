@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/03/04 17:53:43 by lodovico         ###   ########.fr        #
+#    Updated: 2021/03/04 21:09:42 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ EM		=	event_manage/ft_close.c\
 			event_manage/ft_new_frame.c\
 			event_manage/ft_movement.c
 
-MAIN	=	main/ft_init.c
+MAIN	=	main/ft_init.c\
+			main/ft_cub_init.c
 
 
 UT		=	utils/ft_split.c\
@@ -46,7 +47,9 @@ UT		=	utils/ft_split.c\
 			utils/ft_strlcat.c\
 			utils/ft_strlcpy.c\
 			utils/ft_strlen.c\
-			utils/ft_get_next_line.c
+			utils/ft_get_next_line.c\
+			utils/ft_atoi.c\
+			utils/ft_strncmp.c
 
 DB		= 	debuggin/debug.c\
 			debuggin/debugstr.c\
