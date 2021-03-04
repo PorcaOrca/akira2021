@@ -6,11 +6,18 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:10:38 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 10:26:37 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/04 09:57:45 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../akira2021.h"
+
+
+
+void      ft_sprite(t_param *param)
+{
+  
+}
 
 /SPRITE CASTING
     //sort sprites from far to close
@@ -23,9 +30,7 @@
 
     //after sorting the sprites, do the projection and draw them
     for(int i = 0; i < numSprites; i++)
-    {
-      //translate sprite position to relative to camera
-      double spriteX = sprite[spriteOrder[i]].x - posX;
+    {perpendicular= sprite[spriteOrder[i]].x - posX;
       double spriteY = sprite[spriteOrder[i]].y - posY;
 
       //transform sprite with the inverse camera matrix

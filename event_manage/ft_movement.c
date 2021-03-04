@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 10:59:52 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/03 16:21:00 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int		ft_movement(int keycode, t_param *param)
 			Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX - coll)] == '0')
 			posY -= dirY * movspeed;
 	}
-	// rotating visual
-
 	// right rotation
 	if (keycode == 65363 || keycode == 2)
 		{

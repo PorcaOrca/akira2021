@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 08:22:52 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/02 10:44:51 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:09:21 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,25 @@
 int		main()
 {
 	t_param		*param;
+	t_temp		*temp_cub;
+
+	temp_cub = (t_temp *)malloc(sizeof(t_temp));
+
+	// get the values from the cub files allocatin the char * for the path of the texture
+	// remember to free them after initializing the textures and also free the temp struct cause it's temp
+	ft_cub_init(temp_cub, "maps/map_files/map.cub");
 
 	param = (t_param *)malloc(sizeof(t_param));
 
-	debugstr("start");
-		//initialize server mlx connection and create a new win
-
-
-	debugstr("connection");
 	//initializing all variables
-	if (!ft_init(param))
+	if (!ft_init(param, temp_cub))
 		ft_close(65307, param);
-	
-	debugstr("init");
-	//reading map and storing in matrix
-	Wmap = ft_map_matrix("maps/map_files/map.cub");
 
-	debugstr("mapread");
+	free(temp_cub);
 
 	//event callers
-	mlx_hook(param->win, 2, 1L<<0, ft_movement, param);
 	mlx_loop_hook(param->mlx, ft_new_frame, param);
+	mlx_hook(param->win, 2, 1L<<0, ft_movement, param);
 	mlx_key_hook(param->win, ft_close, param);
 	mlx_loop(param->mlx);
 }

@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_free.c                                      :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 17:05:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/23 17:08:38 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/13 11:19:41 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/03/04 16:57:55 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../akira2021.h"
 
-void	ft_map_free(t_map *map, int x)
+char	*ft_strchr(const char *str, int c)
 {
-	while (x >= 0)
+	char	temp;
+	size_t	i;
+	int		is_eq;
+
+	i = 0;
+	temp = (char)c;
+	while (str[i])
 	{
-		free(map->matrix[x]);
-		x--;
+		is_eq = str[i] - temp;
+		if (is_eq == 0)
+			return ((char *)&str[i]);
+		i++;
 	}
-	free(map->matrix);
+	if (c == 0)
+		return ((char *)&str[i]);
+	return (NULL);
 }

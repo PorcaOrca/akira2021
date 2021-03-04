@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:56:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 09:45:27 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/03 12:07:46 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_fill_px(t_param *param)
 {
 	wl_data->txtpos = (wl_data->ystart - winY / 2 + wl_data->lineh / 2) * wl_data->step;
-	while (wl_data->ystart <= wl_data->yend)
+	while (wl_data->ystart < wl_data->yend)
 		{
 			txtY = (int)wl_data->txtpos;
 			trgb = ft_get_txtcolor(wl_data->txt->txt_data, txtX, txtY);

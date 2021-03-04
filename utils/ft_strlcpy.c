@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_img_fill.c                                      :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 09:19:03 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 15:55:21 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/12 10:31:33 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/03/04 16:59:07 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../akira2021.h"
 
-void	ft_img_fill(t_param *param)
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	ft_img_floor(param);
-	ft_img_wall(param);
+	size_t i;
+
+	i = 0;
+	if (!src || !dst)
+		return (0);
+	if (dstsize > 0)
+	{
+		while (i < dstsize - 1 && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
 }
