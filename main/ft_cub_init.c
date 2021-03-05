@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 10:57:41 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/04 21:12:37 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 09:53:17 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	int		fd;
 	char	*str;
 	char	**matrix;
+	char	*map_str[256];
 	int		i;
 	int		j;
 	int		ret;
@@ -25,10 +26,11 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	int		r;
 	int		g;
 	int		b;
-	map_line = 1;
+	ret = 1;
+	map_line = 0;
 	temp->sprite_q = 0;
 	fd = open(mapfile, O_RDONLY);
-	while (*str != '1' && ret)
+	while (ret)
 	{
 		ret = get_next_line(fd, &str);
 		if (*str == 'R')
@@ -102,37 +104,70 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 			free(matrix[0]);
 			free(matrix);
 		}
+		else if (*str == '1')
+		{
+			map_str[map_line] = str;
+			map_line = 1;
+			break;
+		}
+		free(str);
 	}
 	while (ret)
 	{
 		ret = get_next_line(fd, &str);
+		map_str[map_line] = str;
 		map_line++;
 	}
+	close(fd);
 	matrix = (char **)malloc(sizeof(char *) * (map_line + 1));
 	matrix[map_line] = NULL;
-	while (*str != '1' && ret)
-		ret = get_next_line(fd, &str);
-	matrix[0] = str;
-	i = 1;
-	while (ret)
+
+	i = 0;
+	while (i < map_line)
 	{
 		j = 0;
-		ret = get_next_line(fd, &matrix[i]);
+		matrix[i] = map_str[i]; 
 		while (matrix[i][j])
 		{
 			if (matrix[i][j] == '2')
 				temp->sprite_q++;
 			if (matrix[i][j] == 'N')
 			{
+				matrix[i][j] = '0';
 				temp->position[0] = j;
 				temp->position[1] = i;
 			}
 			if (matrix[i][j] == ' ')
 				matrix[i][j] = '0';
+			if (matrix[i][j] == '2')
+				temp->sprite_q++;
 			j++;
+
 		}
 		i++;
 	}
 	temp->temp_map = matrix;
-	close(fd);
 }
+
+/*
+int main()
+{
+	t_temp temp;
+	int i = 0;
+	
+	ft_cub_init(&temp, "./maps/map_files/map.cub");
+	debugint(temp.height);
+	debugint(temp.width);
+	debugstr(temp.texture1);
+	debugstr(temp.texture2);
+	debugstr(temp.texture3);
+	debugstr(temp.texture4);
+	debugint(temp.position[0]);
+	debugint(temp.position[1]);
+	while (temp.temp_map[i])
+	{
+		debugstr(temp.temp_map[i]);
+		i++;
+	}
+}
+*/

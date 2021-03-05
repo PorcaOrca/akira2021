@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:56:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 12:07:46 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 10:27:55 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	ft_img_wall(t_param *param)
 		ft_calc_column(param);
 		wl_data->txt = ft_txt_select(param);
 		ft_fill_column(param);
+		sp_data->zbuffer[i_x] = wl_data->walldist;
 		i_x++;
 	}
 }

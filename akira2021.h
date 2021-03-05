@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/04 18:01:26 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 11:41:03 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define txt_2		param->texture->texture2
 # define txt_3		param->texture->texture3
 # define txt_4		param->texture->texture4
+# define txt_spr	param->texture->sprite
 # define txt_sb		param->texture->skybox
 # define txt_f_1	param->texture->floor_1
 # define fl_data	param->floor_data
@@ -91,6 +92,7 @@ typedef struct	s_texture
 	t_txt	*texture4;
 	t_txt	*floor_1;
 	t_txt	*skybox;
+	t_txt	*sprite;
 }				t_texture;
 
 
@@ -164,7 +166,7 @@ typedef struct		s_spr
 {
 	int		s_pos_x;
 	int		s_pos_y;
-	t_txt	s_txt;
+	t_txt	*s_txt;
 }					t_spr;
 
 // sprite data struct
@@ -187,7 +189,9 @@ typedef struct		s_sp_data
     int		spstartY;
     int		spendY;
     int		spstartX;
-    int		spendX;    
+    int		spendX;
+	int		stripe;
+	int		d;
 }					t_sp_data;
 
 // all the parameter are here btw....it' s not working
@@ -248,6 +252,10 @@ void		ft_DDA(t_param *param);
 void		ft_step(t_param *param);
 void		ft_deltadist(t_wl_data *data);
 void		ft_img_wall(t_param *param);
+void		ft_sprite_sort(int	*order, double *dist, int q);
+void		ft_sprite(t_param *param);
+
+
 
 // texture management prototipes
 

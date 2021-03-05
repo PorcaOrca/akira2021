@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/04 18:08:38 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 11:49:31 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 int		ft_init(t_param *param, t_temp *temp)
 {
 	// map pointer
-
+	int		i;
+	int		j;
+	int		s;
+	
+	i = 0;
+	s = 0;
 	Wmap = temp->temp_map;
 
 	// vectors allocation
-
 	param->vectors = (t_rayc *)malloc(sizeof(t_rayc));
 	param->vectors->dir = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->pos = (t_vector *)malloc(sizeof(t_vector));
 	param->vectors->plane = (t_vector *)malloc(sizeof(t_vector));
-
 	// raycasting vectors
 	posX = temp->position[0];
 	posY = temp->position[1];
@@ -32,19 +35,6 @@ int		ft_init(t_param *param, t_temp *temp)
 	dirY = 0;
 	planeX = 0;
 	planeY = 0.66;
-
-	fl_data = (t_fl_data *)malloc(sizeof(t_fl_data));
-	wl_data = (t_wl_data *)malloc(sizeof(t_wl_data));
-	param->common_data = (t_common *)malloc(sizeof(t_common));
-	sp_data = (t_sp_data *)malloc(sizeof(t_sp_data));
-
-	// sprite arrays needed to do after map read
-	
-	sp_data->zbuffer = (int *)malloc(sizeof(int) * winX);
-	sp_data->dist = (double *)malloc(sizeof(double) * param->sprite_num);
-	sp_data->order = (int *)malloc(sizeof(int) * param->sprite_num);
-	sp_data->sp_arr = (t_spr *)malloc(sizeof(t_spr) * param->sprite_num);
-
 
 	param->settings = (t_settings *)malloc(sizeof(t_settings));
 	// settings
@@ -55,10 +45,15 @@ int		ft_init(t_param *param, t_temp *temp)
 	movspeed = 0.2;
 	rotspeed = 0.1;
 
+	fl_data = (t_fl_data *)malloc(sizeof(t_fl_data));
+	wl_data = (t_wl_data *)malloc(sizeof(t_wl_data));
+	param->common_data = (t_common *)malloc(sizeof(t_common));
+	sp_data = (t_sp_data *)malloc(sizeof(t_sp_data));
+
+
 	//initialize server mlx connection and create a new win
 	param->mlx = mlx_init();
 	param->win = mlx_new_window(param->mlx, winX, winY, "akira2021");
-	debugstr("connection");
 	
 	// texture struct init
 	param->texture = (t_texture *)malloc(sizeof(t_texture));
@@ -75,6 +70,31 @@ int		ft_init(t_param *param, t_temp *temp)
 	free(temp->texture4);
 //	txt_sb = ft_txt_init(param, "img_manage/textures/texture_files/txt_skybox.xpm");
 	txt_f_1 = ft_txt_init(param, "img_manage/textures/texture_files/txt_floor_blue_1.xpm");
+
+	// sprite arrays needed to do after map read
+	param->sprite_num = temp->sprite_q;
+	sp_data->zbuffer = (int *)malloc(sizeof(int) * winX);
+	sp_data->dist = (double *)malloc(sizeof(double) * param->sprite_num);
+	sp_data->order = (int *)malloc(sizeof(int) * param->sprite_num);
+	sp_data->sp_arr = (t_spr *)malloc(sizeof(t_spr) * param->sprite_num);
+	txt_spr = ft_txt_init(param, "img_manage/textures/texture_files/txt_sprite_prova.xpm");
+	while (Wmap[i])
+	{
+		j = 0;
+		while (Wmap[i][j])
+		{
+			if (Wmap[i][j] == '2')
+			{
+				sp_data->sp_arr[s].s_pos_x = j;
+				sp_data->sp_arr[s].s_pos_y = i;
+				sp_data->sp_arr[s].s_txt = txt_spr;
+				s++;
+			}
+			j++;
+		}
+		i++;
+	}
+	debug();
 
 	return (1);
 }
