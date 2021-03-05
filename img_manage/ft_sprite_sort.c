@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sprite_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 09:09:57 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/04 09:32:59 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:50:19 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_sprite_sort(int	*order, double *dist, int q)
 		j = 1;
 		while ((i + j) < q)
 		{
-			if (dist[i + j] < dist[i])
+			if (dist[i + j] > dist[i])
 			{
 				temporder = order[i];
 				order[i] = order[i + j];

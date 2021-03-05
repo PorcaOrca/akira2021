@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sprite.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 10:11:54 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/05 11:46:02 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:56:20 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_sprite(t_param *param)
 	int		i;
 
 	i = 0;
-	
+
 	// sort sprites from far to closest bubblesort rulez
 	while (i < param->sprite_num)
 	{
@@ -38,12 +38,13 @@ void	ft_sprite(t_param *param)
 		sp_data->invdet = 1 / ((planeX * dirY) - (dirX * planeY));
 		sp_data->transX = sp_data->invdet * ((dirY * sp_data->spriteX) - (dirX * sp_data->spriteY));
 		sp_data->transY = sp_data->invdet * ((-planeY * sp_data->spriteX) + (planeX * sp_data->spriteY));
-		sp_data->spscreenX = (int)((winX) * (1 + (sp_data->transX / sp_data->transY)));
+		sp_data->spscreenX = (int)((winX / 2) * (1 + (sp_data->transX / sp_data->transY)));
 
 		//height of sprite on the screen
-		if ((sp_data->spriteH = (int)(winY / sp_data->transY)) < 0)
+		sp_data->spriteH = (int)(winY / sp_data->transY);
+		if (sp_data->spriteH < 0)
 			sp_data->spriteH = -sp_data->spriteH;
-		
+
 		// find highest and lowest pixel
 		sp_data->spstartY = -sp_data->spriteH / 2 + winY / 2;
 		if (sp_data->spstartY < 0)
@@ -63,11 +64,11 @@ void	ft_sprite(t_param *param)
 		if (sp_data->spendX >= winX)
 			sp_data->spendX = winX - 1;
 
-		// we begin whith a loop troght every vertical stripe of the prite on the creen
+		// we begin whith a loop troght every vertical stripe of the sprite on the creen
 		sp_data->stripe = sp_data->spstartX;
 		while (sp_data->stripe < sp_data->spendX)
 		{
-			txtX = (int)(256 * (sp_data->stripe - (-sp_data->spriteW / 2 + sp_data->spscreenX) * sp_data->sp_arr[sp_data->order[i]].s_txt->texture_Width / sp_data->spriteW)) / 256;
+			txtX = (int)(266 * (sp_data->stripe - (-sp_data->spriteW / 2 + sp_data->spscreenX)) * sp_data->sp_arr[sp_data->order[i]].s_txt->texture_Width / sp_data->spriteW) / 266;
 			// condition to print:
 			// in front of the camera plane....not back
 			// on the screen to left and right
@@ -78,8 +79,8 @@ void	ft_sprite(t_param *param)
 				i_y = sp_data->spstartY;
 				while (i_y < sp_data->spendY)
 				{
-					sp_data->d = (i_y * 256) - (winY * 128) + (sp_data->spriteH * 128); //factors to avoid float to check
-					txtY = ((sp_data->d * sp_data->sp_arr[sp_data->order[i]].s_txt->texture_High) / sp_data->spriteH) / 256;
+					sp_data->d = (i_y * 266) - (winY * 132) + (sp_data->spriteH * 132); //factors to avoid float to check
+					txtY = ((sp_data->d * sp_data->sp_arr[sp_data->order[i]].s_txt->texture_High) / sp_data->spriteH) / 266;
 					trgb = ft_get_txtcolor(sp_data->sp_arr[sp_data->order[i]].s_txt->txt_data, txtX, txtY);
 					if (trgb != 0x00000000)
 						ft_img_pixel_put(param->img, sp_data->stripe, i_y, trgb);

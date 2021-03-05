@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/05 11:49:31 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:09:28 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_init(t_param *param, t_temp *temp)
 	int		i;
 	int		j;
 	int		s;
-	
+
 	i = 0;
 	s = 0;
 	Wmap = temp->temp_map;
@@ -44,6 +44,8 @@ int		ft_init(t_param *param, t_temp *temp)
 	lagc = lagi;
 	movspeed = 0.2;
 	rotspeed = 0.1;
+	f_trgb = temp->floor_color;
+	c_trgb = temp->ceiling_color;
 
 	fl_data = (t_fl_data *)malloc(sizeof(t_fl_data));
 	wl_data = (t_wl_data *)malloc(sizeof(t_wl_data));
@@ -54,7 +56,7 @@ int		ft_init(t_param *param, t_temp *temp)
 	//initialize server mlx connection and create a new win
 	param->mlx = mlx_init();
 	param->win = mlx_new_window(param->mlx, winX, winY, "akira2021");
-	
+
 	// texture struct init
 	param->texture = (t_texture *)malloc(sizeof(t_texture));
 
@@ -88,6 +90,7 @@ int		ft_init(t_param *param, t_temp *temp)
 				sp_data->sp_arr[s].s_pos_x = j;
 				sp_data->sp_arr[s].s_pos_y = i;
 				sp_data->sp_arr[s].s_txt = txt_spr;
+				Wmap[i][j] = '0';
 				s++;
 			}
 			j++;

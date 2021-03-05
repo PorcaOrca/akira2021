@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_movement.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 16:21:00 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:54:17 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_movement(int keycode, t_param *param)
 			posY += (dirY * movspeed);
 	}
 	// strafe right
-	if (keycode == 100 || keycode == 13)
+	if (keycode == 100 || keycode == 2)
 	{
 		if (Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) + coll))] == '0' &&
 			Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) + coll))] == '0')
@@ -41,7 +41,7 @@ int		ft_movement(int keycode, t_param *param)
 			posY += (planeY * movspeed);
 	}
 	// strafe left
-	if (keycode == 97 || keycode == 13)
+	if (keycode == 97 || keycode == 0)
 	{
 		if (Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) + coll))] == '0' &&
 			Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) + coll))] == '0')
@@ -61,7 +61,7 @@ int		ft_movement(int keycode, t_param *param)
 			posY -= dirY * movspeed;
 	}
 	// right rotation
-	if (keycode == 65363 || keycode == 2)
+	if (keycode == 65363 || keycode == 124)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;
@@ -72,7 +72,7 @@ int		ft_movement(int keycode, t_param *param)
 		}
 	// left rotation
 
-	if (keycode == 65361 || keycode == 0)
+	if (keycode == 65361 || keycode == 123)
 		{
 			tempdirX = dirX;
 			tempplaneX = planeX;

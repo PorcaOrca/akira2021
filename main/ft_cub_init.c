@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cub_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 10:57:41 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/05 09:53:17 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:10:04 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	ret = 1;
 	map_line = 0;
 	temp->sprite_q = 0;
+	temp->floor_color = 0xFFFFFFFF;
+	temp->ceiling_color = 0x000000FF;
 	fd = open(mapfile, O_RDONLY);
 	while (ret)
 	{
@@ -126,7 +128,7 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	while (i < map_line)
 	{
 		j = 0;
-		matrix[i] = map_str[i]; 
+		matrix[i] = map_str[i];
 		while (matrix[i][j])
 		{
 			if (matrix[i][j] == '2')
@@ -154,7 +156,7 @@ int main()
 {
 	t_temp temp;
 	int i = 0;
-	
+
 	ft_cub_init(&temp, "./maps/map_files/map.cub");
 	debugint(temp.height);
 	debugint(temp.width);

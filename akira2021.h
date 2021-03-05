@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   akira2021.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/05 11:41:03 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:08:21 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define lagc		param->settings->lag_count
 # define winX		param->settings->window_size_x
 # define winY		param->settings->window_size_y
+# define f_trgb		param->settings->floor_trgb
+# define c_trgb		param->settings->ceiling_trgb
 # define Wmap		param->map
 # define txt_1		param->texture->texture1
 # define txt_2		param->texture->texture2
@@ -63,6 +65,8 @@ typedef struct	s_settings
 	int			lag_count;
 	int			window_size_x;
 	int			window_size_y;
+	int			floor_trgb;
+	int			ceiling_trgb;
 }				t_settings;
 
 // img datas struct
