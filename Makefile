@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+         #
+#    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/03/05 14:47:14 by lspazzin         ###   ########.fr        #
+#    Updated: 2021/03/05 18:31:27 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ SRCS	=	$(DB)\
 			$(UT)
 
 
-# MLX_F	=	-lmlx -lXext -lX11 -lm -lbsd
+MLX_F	=	-lmlx -lXext -lX11 -lm -lbsd
 
-MLX_F	=	-lmlx -framework OpenGL -framework AppKit
+# MLX_F	=	-lmlx -framework OpenGL -framework AppKit
 
 TM		=	img_manage/textures/ft_get_txtcolor.c\
 			img_manage/textures/ft_txt_init.c

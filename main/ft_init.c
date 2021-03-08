@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/05 16:09:28 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/08 11:35:19 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		ft_init(t_param *param, t_temp *temp)
 
 	// sprite arrays needed to do after map read
 	param->sprite_num = temp->sprite_q;
-	sp_data->zbuffer = (int *)malloc(sizeof(int) * winX);
+	sp_data->zbuffer = (double *)malloc(sizeof(double) * winX);
 	sp_data->dist = (double *)malloc(sizeof(double) * param->sprite_num);
 	sp_data->order = (int *)malloc(sizeof(int) * param->sprite_num);
 	sp_data->sp_arr = (t_spr *)malloc(sizeof(t_spr) * param->sprite_num);
@@ -87,8 +87,8 @@ int		ft_init(t_param *param, t_temp *temp)
 		{
 			if (Wmap[i][j] == '2')
 			{
-				sp_data->sp_arr[s].s_pos_x = j;
-				sp_data->sp_arr[s].s_pos_y = i;
+				sp_data->sp_arr[s].s_pos_x = j + 0.5;
+				sp_data->sp_arr[s].s_pos_y = i + 0.5;
 				sp_data->sp_arr[s].s_txt = txt_spr;
 				Wmap[i][j] = '0';
 				s++;
@@ -97,7 +97,6 @@ int		ft_init(t_param *param, t_temp *temp)
 		}
 		i++;
 	}
-	debug();
 
 	return (1);
 }

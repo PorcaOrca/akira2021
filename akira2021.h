@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   akira2021.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/05 16:08:21 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/08 11:31:38 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,8 @@ typedef struct		s_common
 
 typedef struct		s_spr
 {
-	int		s_pos_x;
-	int		s_pos_y;
+	double	s_pos_x;
+	double	s_pos_y;
 	t_txt	*s_txt;
 }					t_spr;
 
@@ -179,7 +179,7 @@ typedef struct		s_sp_data
 {
 	t_spr	*sp_arr;
     int		i;
-    int		*zbuffer;
+    double	*zbuffer;
     int		*order;
     double	*dist;
     double	spriteX;
