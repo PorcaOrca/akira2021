@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 10:31:33 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 16:59:07 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/18 11:43:17 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/01/18 11:52:44 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
+int		ft_lstsize(t_list *lst)
 {
-	size_t i;
+	int		i;
 
-	i = 0;
-	if (!src || !dst)
+	i = 1;
+	if (!lst)
 		return (0);
-	if (dstsize > 0)
+	while (lst->next != NULL)
 	{
-		while (i < dstsize - 1 && src[i])
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
+		lst = lst->next;
+		i++;
 	}
-	return (ft_strlen(src));
+	return (i);
 }

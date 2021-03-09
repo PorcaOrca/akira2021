@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:37:08 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 16:58:59 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/01/21 08:36:29 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
 unsigned int	ft_strlcat(char *dest, const char *src, size_t size)
 {

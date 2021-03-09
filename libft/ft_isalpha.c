@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 17:59:37 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 16:58:18 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/12 08:24:59 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/01/16 11:21:34 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
-
-char	*ft_strdup(const char *str)
+int		ft_isalpha(int c)
 {
-	char	*dup;
-	int		size;
-
-	size = ft_strlen(str);
-	dup = (char *)malloc(sizeof(char) * (size + 1));
-	if (dup == NULL)
-		return (NULL);
-	ft_strlcpy(dup, str, size + 1);
-	return (dup);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
 }

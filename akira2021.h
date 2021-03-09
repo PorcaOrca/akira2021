@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/08 11:31:38 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 11:06:52 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <string.h>
+# include "libft/libft.h"
 
 // macros definition
 
@@ -198,6 +199,19 @@ typedef struct		s_sp_data
 	int		d;
 }					t_sp_data;
 
+// key status struct
+
+typedef struct		t_key_stat
+{
+	int		mv_up;
+	int		mv_down;
+	int		mv_left;
+	int		mv_right;
+	int		rt_left;
+	int		rt_right;
+}					t_key_stat;
+
+
 // all the parameter are here btw....it' s not working
 typedef struct	s_param
 {
@@ -211,6 +225,7 @@ typedef struct	s_param
 	t_fl_data	*floor_data;
 	t_wl_data	*wall_data;
 	t_sp_data	*sprite_data;
+	t_key_stat	*keys;
 	int			sprite_num;
 	char		**map;
 }				t_param;
@@ -230,6 +245,10 @@ typedef struct		s_temp
 	int		height;
 	int		floor_color;
 	int		ceiling_color;
+	double	t_dirX;
+	double	t_dirY;
+	double	t_planeX;
+	double	t_planeY;
 }					t_temp;
 // maps struct definition
 
@@ -269,9 +288,11 @@ int			ft_get_txtcolor(t_img *img, int x, int y);
 
 // event management prototipes
 
-int			ft_close(int keycode, t_param *param);
+void		ft_close(t_param *param);
 int			ft_new_frame(t_param *param);
-int			ft_movement(int keycode, t_param *param);
+void		ft_movement(t_param *param);
+int			ft_key_release(int keycode, t_param *param);
+int			ft_key_press(int keycode, t_param *param);
 
 // main prototipes
 
@@ -279,18 +300,7 @@ int			ft_init(t_param *param, t_temp *temp);
 void		ft_cub_init(t_temp *temp, char *mapfile);
 
 // utils prototipes
-char		**ft_split(char const *str, char c);
-char		*ft_strchr(const char *str, int c);
-char		*ft_strdup(const char *str);
-char		*ft_strjoin(char const *str1, char const *str2);
-unsigned int	ft_strlcat(char *dest, const char *src, size_t size);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t		ft_strlen(const char *str);
 int			get_next_line(int fd, char **line);
-int			ft_atoi(char *str);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-
-
 
 // write a string cause i am lazy
 void	debug();

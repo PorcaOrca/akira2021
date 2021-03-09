@@ -6,13 +6,13 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/03/05 18:31:27 by lodovico         ###   ########.fr        #
+#    Updated: 2021/03/09 11:06:12 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	$(DB)\
+SRCS	=	$(MAIN)\
+			$(DB)\
 			$(EM)\
-			$(MAIN)\
 			$(IM)\
 			$(TM)\
 			$(UT)
@@ -36,28 +36,22 @@ IM		=	img_manage/color_manage/ft_color.c\
 
 EM		=	event_manage/ft_close.c\
 			event_manage/ft_new_frame.c\
-			event_manage/ft_movement.c
+			event_manage/ft_movement.c\
+			event_manage/ft_key_press.c\
+			event_manage/ft_key_release.c
 
-MAIN	=	main/ft_init.c\
+MAIN	=	main/ft_akira2021.c\
+			main/ft_init.c\
 			main/ft_cub_init.c
 
 
-UT		=	utils/ft_split.c\
-			utils/ft_strchr.c\
-			utils/ft_strdup.c\
-			utils/ft_strjoin.c\
-			utils/ft_strlcat.c\
-			utils/ft_strlcpy.c\
-			utils/ft_strlen.c\
-			utils/ft_get_next_line.c\
-			utils/ft_atoi.c\
-			utils/ft_strncmp.c
-
+UT		=	utils/ft_get_next_line.c\
+			
 DB		= 	debuggin/debug.c\
 			debuggin/debugstr.c\
 			debuggin/debugint.c
 
-NAME	=	akira2021.a
+NAME	=	akira2021
 
 CFLAGS	=	-Wall -Werror -Wextra -g
 
@@ -66,18 +60,16 @@ CC		=	gcc
 OBJCS	=	$(SRCS:.c=.o)
 
 $(NAME):	$(OBJCS)
-			ar -rc $(NAME) $(OBJCS)
-			ranlib $(NAME)
+			@$(MAKE) bonus -C ./libft
+			$(CC) $(OBJCS) $(CFLAGS) $(MLX_F) ./libft/libft.a -o $(NAME)
 
-compile:	$(NAME)
-			$(CC) $(CFLAGS) main/ft_akira2021.c $(NAME) $(MLX_F) -o akira2021
-
-run:		compile
+run:		$(NAME)
 			./akira2021
 
 all:		$(NAME)
 
 clean:
+			@$(MAKE) clean -C ./libft
 			rm -f $(OBJCS)
 
 fclean:		clean
@@ -85,4 +77,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re compile run
+.PHONY:		all clean fclean re run

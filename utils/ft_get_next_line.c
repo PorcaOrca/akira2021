@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 08:49:51 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 17:00:54 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 10:10:07 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ int		get_next_line(int fd, char **line)
 {
 	static char		*buffer[256];
 	char			*end_line;
-	int				BUFFER_SIZE;
-	
-	BUFFER_SIZE = 10;
-	if (fd < 0 || fd > 256 || BUFFER_SIZE <= 0 || !line)
+
+	if (fd < 0 || fd > 256 || !line)
 		return (-1);
 	end_line = NULL;
 	if (!buffer[fd])
@@ -76,7 +74,7 @@ int		get_next_line(int fd, char **line)
 		if (!(buffer[fd] = ft_strdup("")))
 			return (-1);
 	}
-	if ((ft_read_line(&end_line, &buffer[fd], fd, BUFFER_SIZE)) < 0)
+	if ((ft_read_line(&end_line, &buffer[fd], fd, 10)) < 0)
 	{
 		free(buffer[fd]);
 		return (-1);

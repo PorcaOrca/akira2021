@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 10:55:50 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 16:57:46 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/01/25 11:48:13 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
 static char	**ft_freematrix(char **matrix, int i)
 {

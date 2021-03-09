@@ -3,26 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:13:57 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 21:14:40 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/01/21 10:36:13 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
 static int	ft_isspace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v'
 		|| c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
-
-static int	ft_isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }

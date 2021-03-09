@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 11:41:51 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 17:24:48 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/13 09:01:55 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/03/09 09:35:36 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t	i;
+	size_t				i;
+	unsigned char		*tdest;
+	unsigned const char	*tsrc;
 
 	i = 0;
+	tdest = (unsigned char *)dst;
+	tsrc = (unsigned const char *)src;
+	if ((void *)&tdest[i] == 0 && (void *)&tsrc[i] == 0)
+		return (NULL);
 	while (i < n)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		if (s1[i] == 0 || s2[i] == 0)
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		tdest[i] = tsrc[i];
 		i++;
 	}
-	return (0);
+	return (dst);
 }

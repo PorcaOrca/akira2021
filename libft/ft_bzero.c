@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 11:19:41 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 16:57:55 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/13 08:55:26 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/01/17 18:36:14 by lspazzin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+void	ft_bzero(void *s, size_t n)
 {
-	char	temp;
-	size_t	i;
-	int		is_eq;
+	size_t			i;
+	unsigned char	*ts;
 
 	i = 0;
-	temp = (char)c;
-	while (str[i])
+	ts = (unsigned char *)s;
+	while (i < n)
 	{
-		is_eq = str[i] - temp;
-		if (is_eq == 0)
-			return ((char *)&str[i]);
+		ts[i] = 0;
 		i++;
 	}
-	if (c == 0)
-		return ((char *)&str[i]);
-	return (NULL);
 }

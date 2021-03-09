@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:28:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/02/26 18:05:04 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 11:03:14 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		ft_new_frame(t_param *param)
 {
+	ft_movement(param);
 	if (!lagc)
 	{
 		param->img = ft_img_init(param);
-
 		ft_img_fill(param);
 		mlx_clear_window(param->mlx, param->win);
 		mlx_put_image_to_window(param->mlx, param->win, param->img->ptr, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/08 11:35:19 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 11:10:41 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		ft_init(t_param *param, t_temp *temp)
 	// raycasting vectors
 	posX = temp->position[0];
 	posY = temp->position[1];
-	dirX = -1;
-	dirY = 0;
-	planeX = 0;
-	planeY = 0.66;
+	dirX = temp->t_dirX;
+	dirY = temp->t_dirY;
+	planeX = temp->t_planeX;
+	planeY = temp->t_planeY;
 
 	param->settings = (t_settings *)malloc(sizeof(t_settings));
 	// settings
@@ -42,8 +42,8 @@ int		ft_init(t_param *param, t_temp *temp)
 	winY = temp->height;
 	lagi = 0;
 	lagc = lagi;
-	movspeed = 0.2;
-	rotspeed = 0.1;
+	movspeed = 0.1;
+	rotspeed = 0.05;
 	f_trgb = temp->floor_color;
 	c_trgb = temp->ceiling_color;
 
@@ -79,7 +79,7 @@ int		ft_init(t_param *param, t_temp *temp)
 	sp_data->dist = (double *)malloc(sizeof(double) * param->sprite_num);
 	sp_data->order = (int *)malloc(sizeof(int) * param->sprite_num);
 	sp_data->sp_arr = (t_spr *)malloc(sizeof(t_spr) * param->sprite_num);
-	txt_spr = ft_txt_init(param, "img_manage/textures/texture_files/txt_sprite_prova.xpm");
+	txt_spr = ft_txt_init(param, "img_manage/textures/texture_files/sprite1.xpm");
 	while (Wmap[i])
 	{
 		j = 0;
@@ -97,6 +97,14 @@ int		ft_init(t_param *param, t_temp *temp)
 		}
 		i++;
 	}
-
+	
+	// key management
+	param->keys = (t_key_stat *)malloc(sizeof(t_key_stat));
+	param->keys->mv_down = 0;
+	param->keys->mv_up = 0;
+	param->keys->mv_left = 0;
+	param->keys->mv_right = 0;
+	param->keys->rt_left = 0;
+	param->keys->rt_right = 0;
 	return (1);
 }

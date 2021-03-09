@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 09:20:50 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/03/04 16:58:37 by lodovico         ###   ########.fr       */
+/*   Created: 2021/01/13 17:29:04 by lspazzin          #+#    #+#             */
+/*   Updated: 2021/03/09 09:32:12 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../akira2021.h"
+#include "libft.h"
 
-char	*ft_strjoin(char const *str1, char const *str2)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char	*str_out;
-	int		i;
+	void	*str;
 
-	if (!str1 || !str2)
+	str = malloc(count * size);
+	if (str == NULL)
 		return (NULL);
-	i = ft_strlen(str1) + ft_strlen(str2) + 1;
-	str_out = (char *)malloc(sizeof(char) * i);
-	if (str_out == NULL)
-		return (NULL);
-	ft_strlcpy(str_out, str1, i);
-	ft_strlcat(str_out, (char *)str2, i);
-	return (str_out);
+	ft_bzero(str, count * size);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 10:57:41 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/08 10:27:19 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 10:33:24 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	int		fd;
 	char	*str;
 	char	**matrix;
-	char	*map_str[256];
+	t_list	*line;
+	t_list	*new;
 	int		i;
 	int		j;
 	int		ret;
@@ -31,6 +32,10 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	temp->sprite_q = 0;
 	temp->floor_color = 0xFFFFFFFF;
 	temp->ceiling_color = 0x000000FF;
+	temp->t_dirX = 0;
+	temp->t_dirY = 0;
+	temp->t_planeX = 0;
+	temp->t_planeY = 0;
 	fd = open(mapfile, O_RDONLY);
 	while (ret)
 	{
@@ -78,21 +83,21 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 			}
 			free(matrix);
 		}
-		else if (!ft_strncmp("NO", str, 2))
+		else if (!ft_strncmp("WE", str, 2))
 		{
 			matrix = ft_split(str, ' ');
 			temp->texture1 = matrix[1];
 			free(matrix[0]);
 			free(matrix);
 		}
-		else if (!ft_strncmp("EA", str, 2))
+		else if (!ft_strncmp("NO", str, 2))
 		{
 			matrix = ft_split(str, ' ');
 			temp->texture2 = matrix[1];
 			free(matrix[0]);
 			free(matrix);
 		}
-		else if (!ft_strncmp("WE", str, 2))
+		else if (!ft_strncmp("EA", str, 2))
 		{
 			matrix = ft_split(str, ' ');
 			temp->texture3 = matrix[1];
@@ -108,7 +113,7 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 		}
 		else if (*str == '1')
 		{
-			map_str[map_line] = str;
+			line = ft_lstnew(str);
 			map_line = 1;
 			break;
 		}
@@ -117,7 +122,8 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	while (ret)
 	{
 		ret = get_next_line(fd, &str);
-		map_str[map_line] = str;
+		new = ft_lstnew(str);
+		ft_lstadd_back(&line, new);
 		map_line++;
 	}
 	close(fd);
@@ -128,13 +134,33 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	while (i < map_line)
 	{
 		j = 0;
-		matrix[i] = map_str[i];
+		matrix[i] = (char *)line->content;
 		while (matrix[i][j])
 		{
 			if (matrix[i][j] == '2')
 				temp->sprite_q++;
-			if (matrix[i][j] == 'N')
+			if (matrix[i][j] == 'N' || matrix[i][j] == 'S' || matrix[i][j] == 'W' || matrix[i][j] == 'E')
 			{
+				if (matrix[i][j] == 'N')
+				{
+					temp->t_dirY = -1;
+					temp->t_planeX = 0.66;
+				}
+				else if (matrix[i][j] == 'S')
+				{
+					temp->t_dirY = 1;
+					temp->t_planeX = -0.66;
+				}
+				else if (matrix[i][j] == 'E')
+				{
+					temp->t_dirX = 1;
+					temp->t_planeY = 0.66;
+				}
+				else if (matrix[i][j] == 'W')
+				{
+					temp->t_dirX = -1;
+					temp->t_planeY = -0.66;
+				}
 				matrix[i][j] = '0';
 				temp->position[0] = j;
 				temp->position[1] = i;
@@ -144,30 +170,10 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 			j++;
 
 		}
+		new = line->next;
+		free(line);
+		line = new;
 		i++;
 	}
 	temp->temp_map = matrix;
 }
-
-/*
-int main()
-{
-	t_temp temp;
-	int i = 0;
-
-	ft_cub_init(&temp, "./maps/map_files/map.cub");
-	debugint(temp.height);
-	debugint(temp.width);
-	debugstr(temp.texture1);
-	debugstr(temp.texture2);
-	debugstr(temp.texture3);
-	debugstr(temp.texture4);
-	debugint(temp.position[0]);
-	debugint(temp.position[1]);
-	while (temp.temp_map[i])
-	{
-		debugstr(temp.temp_map[i]);
-		i++;
-	}
-}
-*/
