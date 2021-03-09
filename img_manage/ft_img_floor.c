@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:23:15 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/03 16:00:45 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 14:42:04 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,5 @@ void		ft_img_floor(t_param *param)
 		ft_fill_line(param);
 		i_y++;
 	}
-/*	i_y = 0;
-	while (i_y < winY / 2)
-	{
-		i_x = 0;
-		while (i_x < winX)
-		{
-			trgb = ft_get_txtcolor(txt_f_1->txt_data, txtX, txtY);
-			ft_img_pixel_put(param->img, i_x, i_y, trgb);
-			i_x++;
-		}
-		i_y++;
-	}*/
 }
 

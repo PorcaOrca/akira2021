@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 11:10:41 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:14:06 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int		ft_init(t_param *param, t_temp *temp)
 	f_trgb = temp->floor_color;
 	c_trgb = temp->ceiling_color;
 
+	param->sky_data = (t_sky_data *)malloc(sizeof(t_sky_data));
 	fl_data = (t_fl_data *)malloc(sizeof(t_fl_data));
 	wl_data = (t_wl_data *)malloc(sizeof(t_wl_data));
 	param->common_data = (t_common *)malloc(sizeof(t_common));
 	sp_data = (t_sp_data *)malloc(sizeof(t_sp_data));
-
 
 	//initialize server mlx connection and create a new win
 	param->mlx = mlx_init();
@@ -70,7 +70,7 @@ int		ft_init(t_param *param, t_temp *temp)
 	free(temp->texture3);
 	txt_4 = ft_txt_init(param, temp->texture4);
 	free(temp->texture4);
-//	txt_sb = ft_txt_init(param, "img_manage/textures/texture_files/txt_skybox.xpm");
+	txt_sb = ft_txt_init(param, "img_manage/textures/texture_files/txt_skybox.xpm");
 	txt_f_1 = ft_txt_init(param, "img_manage/textures/texture_files/txt_floor_blue_1.xpm");
 
 	// sprite arrays needed to do after map read
@@ -97,6 +97,11 @@ int		ft_init(t_param *param, t_temp *temp)
 		}
 		i++;
 	}
+	
+	// skybox init data
+	param->sky_data->sky_off = 0;
+	param->sky_data->step_y = param->texture->skybox->texture_High;
+	param->sky_data->step_y /= (winY / 2);
 	
 	// key management
 	param->keys = (t_key_stat *)malloc(sizeof(t_key_stat));

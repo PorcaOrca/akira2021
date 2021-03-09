@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 10:11:54 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/08 11:56:21 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 15:35:17 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,12 @@ void	ft_sprite(t_param *param)
 				i_y = sp_data->spstartY;
 				while (i_y < sp_data->spendY)
 				{
-					sp_data->d = (i_y * 266) - (winY * 133) + (sp_data->spriteH * 133); //factors to avoid float to check
-					txtY = ((sp_data->d * sp_data->sp_arr[sp_data->order[i]].s_txt->texture_High) / sp_data->spriteH) / 266;
+					sp_data->d = (i_y * 256) - (winY * 128) + (sp_data->spriteH * 128); //factors to avoid float to check
+					txtY = ((sp_data->d * sp_data->sp_arr[sp_data->order[i]].s_txt->texture_High) / sp_data->spriteH) / 256;
+					if (txtY < 0)
+						txtY = -txtY;
+					if (txtX < 0)
+						txtX = -txtX;
 					trgb = ft_get_txtcolor(sp_data->sp_arr[sp_data->order[i]].s_txt->txt_data, txtX, txtY);
 					if (trgb != 0x00000000)
 						ft_img_pixel_put(param->img, sp_data->stripe, i_y, trgb);

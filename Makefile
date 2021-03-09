@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/03/09 11:06:12 by lodovico         ###   ########.fr        #
+#    Updated: 2021/03/09 14:15:31 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ IM		=	img_manage/color_manage/ft_color.c\
 			img_manage/ft_img_floor.c\
 			img_manage/ft_img_wall.c\
 			img_manage/ft_sprite_sort.c\
-			img_manage/ft_sprite.c
+			img_manage/ft_sprite.c\
+			img_manage/ft_skybox.c
 
 EM		=	event_manage/ft_close.c\
 			event_manage/ft_new_frame.c\

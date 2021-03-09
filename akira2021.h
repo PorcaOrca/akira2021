@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 11:06:52 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:16:59 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ typedef struct		s_common
 	int		iterator_x;
 	int		iterator_y;
 	int		color_trgb;
-	int		texture_X;
-	int		texture_Y;
+	long	texture_X;
+	long	texture_Y;
 }					t_common;
 
 // sprite struct
@@ -211,6 +211,13 @@ typedef struct		t_key_stat
 	int		rt_right;
 }					t_key_stat;
 
+typedef struct		s_sky_data
+{
+	int		sky_off;
+	double	step_y;
+	double 	stepcount;
+}					t_sky_data;
+
 
 // all the parameter are here btw....it' s not working
 typedef struct	s_param
@@ -225,6 +232,7 @@ typedef struct	s_param
 	t_fl_data	*floor_data;
 	t_wl_data	*wall_data;
 	t_sp_data	*sprite_data;
+	t_sky_data	*sky_data;
 	t_key_stat	*keys;
 	int			sprite_num;
 	char		**map;
@@ -277,8 +285,7 @@ void		ft_deltadist(t_wl_data *data);
 void		ft_img_wall(t_param *param);
 void		ft_sprite_sort(int	*order, double *dist, int q);
 void		ft_sprite(t_param *param);
-
-
+void		ft_skybox(t_param *param);
 
 // texture management prototipes
 

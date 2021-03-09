@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:05:28 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 10:46:38 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 14:37:41 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		ft_close(t_param *param)
 	free(fl_data);
 	free(wl_data);
 	free(sp_data);
+	free(param->sky_data);
 	free(param->common_data);
 	free(param->keys);
 	free(param);
