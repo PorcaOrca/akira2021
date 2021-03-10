@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/03/09 14:15:31 by lodovico         ###   ########.fr        #
+#    Updated: 2021/03/10 11:37:39 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,10 @@ $(NAME):	$(OBJCS)
 			@$(MAKE) bonus -C ./libft
 			$(CC) $(OBJCS) $(CFLAGS) $(MLX_F) ./libft/libft.a -o $(NAME)
 
+lib:		$(OBJCS)
+			ar -rc akira2021.a $(OBJCS)
+			ranlib akira2021.a
+			
 run:		$(NAME)
 			./akira2021
 

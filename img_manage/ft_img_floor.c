@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:23:15 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 14:42:04 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/09 17:39:58 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void		ft_fill_line(t_param *param)
 		txtY = (int)(txt_f_1->texture_Width * (fl_data->floorL.y - fl_data->cellY));
 		fl_data->floorL.x += fl_data->fstep.x;
 		fl_data->floorL.y += fl_data->fstep.y;
+		if (txtX < 0)
+			txtX = -txtX;
+		if (txtY < 0)
+			txtY = -txtY;
 		trgb = ft_get_txtcolor(txt_f_1->txt_data, txtX, txtY);
 		ft_img_pixel_put(param->img, i_x, i_y, trgb);
 		i_x++;

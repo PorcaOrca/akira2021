@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lspazzin <lspazzin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:13:57 by lspazzin          #+#    #+#             */
-/*   Updated: 2021/01/21 10:36:13 by lspazzin         ###   ########.fr       */
+/*   Updated: 2021/03/10 10:04:20 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			ft_atoi(char *str)
 		if (nbr > -2147483648 && nbr < 0 && sign > 0)
 			return (-1);
 		if (nbr > -2147483648 && nbr < 0 && sign < 0)
-			return (0);
+			return (-1);
 		i++;
 	}
 	return (nbr * sign);
