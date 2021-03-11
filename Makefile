@@ -6,7 +6,7 @@
 #    By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 10:47:43 by lodovico          #+#    #+#              #
-#    Updated: 2021/03/10 11:37:39 by lodovico         ###   ########.fr        #
+#    Updated: 2021/03/11 09:03:17 by lodovico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ CC		=	gcc
 OBJCS	=	$(SRCS:.c=.o)
 
 $(NAME):	$(OBJCS)
+			rm -rf $(NAME)
 			@$(MAKE) bonus -C ./libft
 			$(CC) $(OBJCS) $(CFLAGS) $(MLX_F) ./libft/libft.a -o $(NAME)
 

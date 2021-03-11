@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 17:40:59 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:37:52 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_init(t_param *param, t_temp *temp)
 	sp_data->dist = (double *)malloc(sizeof(double) * param->sprite_num);
 	sp_data->order = (int *)malloc(sizeof(int) * param->sprite_num);
 	sp_data->sp_arr = (t_spr *)malloc(sizeof(t_spr) * param->sprite_num);
-	txt_spr = ft_txt_init(param, "img_manage/textures/texture_files/sprite_trip.xpm");
+	txt_spr = ft_txt_init(param, "img_manage/textures/texture_files/floor_trip.xpm");
 	while (Wmap[i])
 	{
 		j = 0;

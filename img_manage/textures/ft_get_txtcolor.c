@@ -6,13 +6,13 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 10:40:56 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 17:49:29 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:01:16 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../akira2021.h"
 
-int		ft_get_txtcolor(t_img *img, unsigned int x, unsigned int y)
+int		ft_get_txtcolor(t_img *img, int x, int y)
 {
 	char	*pxl;
 	int		px_color;

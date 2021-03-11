@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 17:50:45 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:01:35 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ typedef struct		s_common
 	int		iterator_x;
 	int		iterator_y;
 	int		color_trgb;
-	long	texture_X;
-	long	texture_Y;
+	int		texture_X;
+	int		texture_Y;
 }					t_common;
 
 // sprite struct
@@ -290,7 +290,7 @@ void		ft_skybox(t_param *param);
 // texture management prototipes
 
 t_txt		*ft_txt_init(t_param *param, char *path);
-int			ft_get_txtcolor(t_img *img, unsigned int x, unsigned int y);
+int			ft_get_txtcolor(t_img *img, int x, int y);
 
 
 // event management prototipes
