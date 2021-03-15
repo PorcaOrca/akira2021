@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:56:29 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/08 11:55:50 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/11 10:57:25 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_DDA(t_param *param)
 			wl_data->mapy += wl_data->stepy;
 			wl_data->side = 1;
 		}
-		if (Wmap[wl_data->mapy][wl_data->mapx] > '0')
+		if (Wmap[wl_data->mapy][wl_data->mapx] == '1')
 			wl_data->hit = 1;
 		}
 }

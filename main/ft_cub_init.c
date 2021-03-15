@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 10:57:41 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/10 12:08:35 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/15 08:52:11 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		ft_temp_init(t_temp *temp)
 	temp->texture2 = NULL;
 	temp->texture3 = NULL;
 	temp->texture4 = NULL;
+	temp->txt_sprite = NULL;
 	temp->position[0] = 0;
 	temp->position[1] = 0;
 	temp->width = 0;
@@ -80,7 +81,6 @@ int			ft_back_color(char **matrix)
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (0xFFFFFFFF);
 	color = ft_color(0, r, g, b);
-	ft_free_matrix(matrix);
 	return (color);
 }
 
@@ -93,6 +93,7 @@ int			ft_background(char *str)
 	matrix = ft_split(str, ' ');
 	if (!matrix)
 		return (0xFFFFFFFF);
+	i = 0;
 	while (matrix[i])
 		i++;
 	if (i != 4 || (ft_strncmp(matrix[0], "F", 2)
@@ -121,7 +122,8 @@ char		*ft_txt_wall(char *str)
 	if (i != 2 || (ft_strncmp(matrix[0], "NO", 3)
 				&& ft_strncmp(matrix[0], "WE", 3)
 				&& ft_strncmp(matrix[0], "SO", 3)
-				&& ft_strncmp(matrix[0], "EA", 3)))
+				&& ft_strncmp(matrix[0], "EA", 3)
+				&& ft_strncmp(matrix[0], "S", 2)))
 		{
 		ft_free_matrix(matrix);
 		return (NULL);
@@ -148,6 +150,8 @@ void		ft_element_select(t_temp *temp, char *str)
 		temp->texture3 = ft_txt_wall(str);
 	else if (!ft_strncmp("SO", str, 2))
 		temp->texture4 = ft_txt_wall(str);
+	else if (*str == 'S')
+		temp->txt_sprite = ft_txt_wall(str);
 }
 
 void		ft_spawn(t_temp *temp, char position)
@@ -174,6 +178,37 @@ void		ft_spawn(t_temp *temp, char position)
 	}
 }
 
+int			ft_map_check(char **matrix)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (matrix[i])
+	{
+		j = 0;
+		while (matrix[i][j])
+		{
+			if (i == 0 || matrix[i + 1] == NULL || j == 0 || matrix[i][j + 1] == '\0')
+			{
+				if (matrix[i][j] != '1' && matrix[i][j] != ' ')
+					return (0);	
+			}
+			else if (matrix[i][j] != '1' && matrix[i][j] != ' ')
+			{
+				if (!ft_strchr("012NSEW", matrix[i - 1][j]) ||
+					!ft_strchr("012NSEW", matrix[i + 1][j]) ||
+					!ft_strchr("012NSEW", matrix[i][j + 1]) ||
+					!ft_strchr("012NSEW", matrix[i][j - 1]))
+						return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 void		ft_map_fill(char **matrix, t_temp *temp, t_list *line, int map_size)
 {
 	int		i;
@@ -192,10 +227,7 @@ void		ft_map_fill(char **matrix, t_temp *temp, t_list *line, int map_size)
 			{
 				temp->position[0] = j;
 				temp->position[1] = i;
-				matrix[i][j] = '0';
-			}	
-			if (matrix[i][j] == ' ')
-				matrix[i][j] = '0';
+			}
 			if (matrix[i][j] == '2')
 				temp->sprite_q++;
 			j++;
@@ -221,18 +253,67 @@ char		**ft_map(t_temp *temp, int fd, char *str)
 	while (ret)
 	{
 		ret = get_next_line(fd, &str);
+		if (ret < 0)
+		{
+			ft_lstclear(&line, free);
+			return (NULL);
+		}
 		new = ft_lstnew(str);
 		ft_lstadd_back(&line, new);
 	}
 	close(fd);
 	map_size = ft_lstsize(line);
 	matrix = (char **)malloc(sizeof(char *) * (map_size + 1));
+	if (!matrix)
+	{
+		ft_lstclear(&line, free);
+		return (NULL);
+	}
 	matrix[map_size] = NULL;
 	ft_map_fill(matrix, temp, line, map_size);
+	if (!ft_map_check(matrix))
+	{
+		ft_free_matrix(matrix);
+		matrix = NULL;
+	}
 	return (matrix);
 }
 
-void		ft_cub_init(t_temp *temp, char *mapfile)
+int			ft_valid_cub(t_temp *temp)
+{
+	if ((unsigned int)temp->floor_color == 0xFFFFFFFF ||
+		(unsigned int)temp->ceiling_color == 0xFFFFFFFF ||
+		temp->texture1 == NULL ||
+		temp->texture2 == NULL ||
+		temp->texture3 == NULL ||
+		temp->texture4 == NULL ||
+		temp->txt_sprite == NULL ||
+		temp->position[0] == 0 ||
+		temp->position[1] == 0 ||
+		temp->width == 0 ||
+		temp->height == 0 ||
+		temp->temp_map == NULL)
+		return (0);
+	return (1);
+}
+
+void	ft_clean(t_temp *temp)
+{
+	if (temp->texture1)
+		free(temp->texture1);
+	if (temp->texture2)
+		free(temp->texture2);
+	if (temp->texture3)
+		free(temp->texture3);
+	if (temp->texture4)
+		free(temp->texture4);
+	if (temp->txt_sprite)
+		free(temp->txt_sprite);
+	if (temp->temp_map)
+		free(temp->temp_map);
+}
+
+int			ft_cub_init(t_temp *temp, char *mapfile)
 {
 	int		fd;
 	char	*str;
@@ -241,9 +322,16 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	ret = 1;
 	ft_temp_init(temp);
 	fd = open(mapfile, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	while (ret)
 	{
 		ret = get_next_line(fd, &str);
+		if (ret < 0)
+		{
+			close(fd);
+			return (0);
+		}
 		ft_element_select(temp, str);
 		if (*str == '1')
 			break;
@@ -251,6 +339,12 @@ void		ft_cub_init(t_temp *temp, char *mapfile)
 	}
 	temp->temp_map = ft_map(temp, fd, str);
 	close(fd);
+	if (!ft_valid_cub(temp))
+	{
+		ft_clean(temp);
+		return (0);
+	}
+	return (1);
 }
 
 

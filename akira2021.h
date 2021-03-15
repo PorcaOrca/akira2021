@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:32:58 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/11 09:01:35 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/13 09:50:30 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ typedef struct		s_temp
 	char	*texture2;
 	char	*texture3;
 	char	*texture4;
+	char	*txt_sprite;
 	char	**temp_map;
 	int		position[2];
 	int		sprite_q;
@@ -304,7 +305,7 @@ int			ft_key_press(int keycode, t_param *param);
 // main prototipes
 
 int			ft_init(t_param *param, t_temp *temp);
-void		ft_cub_init(t_temp *temp, char *mapfile);
+int			ft_cub_init(t_temp *temp, char *mapfile);
 
 // utils prototipes
 int			get_next_line(int fd, char **line);

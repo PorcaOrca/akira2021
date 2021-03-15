@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 09:15:35 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/11 09:37:52 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/11 10:39:56 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ int		ft_init(t_param *param, t_temp *temp)
 	rotspeed = 0.05;
 	f_trgb = temp->floor_color;
 	c_trgb = temp->ceiling_color;
+/*
+	int		x;
+	int		y;
 
+	x = mlx_get_screen_size(param->mlx, x, y);
+	if (winX > x)
+		winX = x;
+	if (winY > y)
+		winY = y;
+*/	
 	param->sky_data = (t_sky_data *)malloc(sizeof(t_sky_data));
 	fl_data = (t_fl_data *)malloc(sizeof(t_fl_data));
 	wl_data = (t_wl_data *)malloc(sizeof(t_wl_data));
@@ -79,7 +88,7 @@ int		ft_init(t_param *param, t_temp *temp)
 	sp_data->dist = (double *)malloc(sizeof(double) * param->sprite_num);
 	sp_data->order = (int *)malloc(sizeof(int) * param->sprite_num);
 	sp_data->sp_arr = (t_spr *)malloc(sizeof(t_spr) * param->sprite_num);
-	txt_spr = ft_txt_init(param, "img_manage/textures/texture_files/floor_trip.xpm");
+	txt_spr = ft_txt_init(param, temp->txt_sprite);
 	while (Wmap[i])
 	{
 		j = 0;

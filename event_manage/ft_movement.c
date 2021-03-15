@@ -6,7 +6,7 @@
 /*   By: lodovico <lodovico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:16:21 by lodovico          #+#    #+#             */
-/*   Updated: 2021/03/09 15:06:01 by lodovico         ###   ########.fr       */
+/*   Updated: 2021/03/11 10:54:40 by lodovico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,41 @@ void		ft_movement(t_param *param)
 	//move forward
 	if (param->keys->mv_up)
 	{
-		if (Wmap[(int)(posY - coll)][(int)((posX + (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX + (dirX * movspeed) + coll))] == '0' &&
-			Wmap[(int)(posY + coll)][(int)((posX + (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX + (dirX * movspeed) + coll))] == '0')
+		if (Wmap[(int)(posY - coll)][(int)((posX + (dirX * movspeed) - coll))] != '1' && Wmap[(int)(posY + coll)][(int)((posX + (dirX * movspeed) + coll))] != '1' &&
+			Wmap[(int)(posY + coll)][(int)((posX + (dirX * movspeed) - coll))] != '1' && Wmap[(int)(posY - coll)][(int)((posX + (dirX * movspeed) + coll))] != '1')
 			posX += (dirX * movspeed);
-		if (Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX + coll)] == '0' &&
-			Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX - coll)] == '0')
+		if (Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX - coll)] != '1' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX + coll)] != '1' &&
+			Wmap[(int)(posY + (dirY * movspeed) - coll)][(int)(posX + coll)] != '1' && Wmap[(int)(posY + (dirY * movspeed) + coll)][(int)(posX - coll)] != '1')
 			posY += (dirY * movspeed);
 	}
 	// strafe right
 	if (param->keys->mv_right)
 	{
-		if (Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) + coll))] == '0' &&
-			Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) + coll))] == '0')
+		if (Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) - coll))] != '1' && Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) + coll))] != '1' &&
+			Wmap[(int)(posY + coll)][(int)((posX + (planeX * movspeed) - coll))] != '1' && Wmap[(int)(posY - coll)][(int)((posX + (planeX * movspeed) + coll))] != '1')
 			posX += (planeX * movspeed);
-		if (Wmap[(int)(posY + (planeY * movspeed) - coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY + (planeY * movspeed) + coll)][(int)(posX + coll)] == '0' &&
-			Wmap[(int)(posY + (planeY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY + (planeY * movspeed) + coll)][(int)(posX - coll)] == '0')
+		if (Wmap[(int)(posY + (planeY * movspeed) - coll)][(int)(posX - coll)] != '1' && Wmap[(int)(posY + (planeY * movspeed) + coll)][(int)(posX + coll)] != '1' &&
+			Wmap[(int)(posY + (planeY * movspeed) - coll)][(int)(posX + coll)] != '1' && Wmap[(int)(posY + (planeY * movspeed) + coll)][(int)(posX - coll)] != '1')
 			posY += (planeY * movspeed);
 	}
 	// strafe left
 	if (param->keys->mv_left)
 	{
-		if (Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) + coll))] == '0' &&
-			Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) + coll))] == '0')
+		if (Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) - coll))] != '1' && Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) + coll))] != '1' &&
+			Wmap[(int)(posY + coll)][(int)((posX - (planeX * movspeed) - coll))] != '1' && Wmap[(int)(posY - coll)][(int)((posX - (planeX * movspeed) + coll))] != '1')
 			posX -= (planeX * movspeed);
-		if (Wmap[(int)(posY - (planeY * movspeed) - coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY - (planeY * movspeed) + coll)][(int)(posX + coll)] == '0' &&
-			Wmap[(int)(posY - (planeY * movspeed) - coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY - (planeY * movspeed) + coll)][(int)(posX - coll)] == '0')
+		if (Wmap[(int)(posY - (planeY * movspeed) - coll)][(int)(posX - coll)] != '1' && Wmap[(int)(posY - (planeY * movspeed) + coll)][(int)(posX + coll)] != '1' &&
+			Wmap[(int)(posY - (planeY * movspeed) - coll)][(int)(posX + coll)] != '1' && Wmap[(int)(posY - (planeY * movspeed) + coll)][(int)(posX - coll)] != '1')
 			posY -= (planeY * movspeed);
 	}
 	//move backward
 	if (param->keys->mv_down)
 	{
-		if (Wmap[(int)(posY - coll)][(int)((posX - (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY + coll)][(int)((posX - (dirX * movspeed) + coll))] == '0' &&
-			Wmap[(int)(posY + coll)][(int)((posX - (dirX * movspeed) - coll))] == '0' && Wmap[(int)(posY - coll)][(int)((posX - (dirX * movspeed) + coll))] == '0')
+		if (Wmap[(int)(posY - coll)][(int)((posX - (dirX * movspeed) - coll))] != '1' && Wmap[(int)(posY + coll)][(int)((posX - (dirX * movspeed) + coll))] != '1' &&
+			Wmap[(int)(posY + coll)][(int)((posX - (dirX * movspeed) - coll))] != '1' && Wmap[(int)(posY - coll)][(int)((posX - (dirX * movspeed) + coll))] != '1')
 			posX -= dirX * movspeed;
-		if (Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX + coll)] == '0' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX + coll)] == '0' &&
-			Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX - coll)] == '0' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX - coll)] == '0')
+		if (Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX + coll)] != '1' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX + coll)] != '1' &&
+			Wmap[(int)(posY - (dirY * movspeed) + coll)][(int)(posX - coll)] != '1' && Wmap[(int)(posY - (dirY * movspeed) - coll)][(int)(posX - coll)] != '1')
 			posY -= dirY * movspeed;
 	}
 	// right rotation
